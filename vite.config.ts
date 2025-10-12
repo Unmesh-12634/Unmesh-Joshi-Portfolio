@@ -4,7 +4,7 @@
   import path from 'path';
 
   export default defineConfig({
-  base: process.env.VITE_BASE || '/Unmesh-Joshi/',
+  base: process.env.VITE_BASE || '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
