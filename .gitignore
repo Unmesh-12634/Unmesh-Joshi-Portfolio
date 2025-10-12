@@ -19,5 +19,5 @@ coverage/
 /.idea/
 .vscode/
 *.tgz
-package-lock.json
+
 /*.zip
