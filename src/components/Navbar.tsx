@@ -23,12 +23,10 @@ export function Navbar() {
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
-            >
-              UJ
+          <Link to="/" aria-label="Home">
+            <motion.div whileHover={{ scale: 1.03 }} className="flex items-center gap-3">
+              <img src="/assets/logo.svg" alt="Site logo" className="w-10 h-10 rounded-md" />
+              <span className="text-lg font-semibold text-foreground/90">Unmesh Joshi</span>
             </motion.div>
           </Link>
 
