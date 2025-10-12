@@ -27,7 +27,7 @@ export function Navbar() {
             <motion.div whileHover={{ scale: 1.03 }} className="flex items-center gap-3">
               <picture>
                 <source srcSet="/assets/logo.png" type="image/png" />
-                <img src="/assets/logo.svg" alt="Site logo" className="w-10 h-10 rounded-md" />
+                <img src="/assets/logo.png" alt="Site logo" className="w-12 h-12 rounded-md" />
               </picture>
               <span className="text-lg font-semibold text-foreground/90">Unmesh Joshi</span>
             </motion.div>

@@ -22,7 +22,7 @@ jobs:
 
       - name: Build
         env:
-          VITE_BASE: /Unmesh-Joshi/
+          VITE_BASE: /Unmesh-Joshi-Portfolio/
         run: npm run build
 
       - name: Deploy to GitHub Pages
