@@ -21,6 +21,8 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          VITE_BASE: /Unmesh-Joshi/
         run: npm run build
 
       - name: Deploy to GitHub Pages
