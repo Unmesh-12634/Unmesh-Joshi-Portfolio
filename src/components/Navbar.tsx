@@ -25,7 +25,10 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           <Link to="/" aria-label="Home">
             <motion.div whileHover={{ scale: 1.03 }} className="flex items-center gap-3">
-              <img src="/assets/logo.svg" alt="Site logo" className="w-10 h-10 rounded-md" />
+              <picture>
+                <source srcSet="/assets/logo.png" type="image/png" />
+                <img src="/assets/logo.svg" alt="Site logo" className="w-10 h-10 rounded-md" />
+              </picture>
               <span className="text-lg font-semibold text-foreground/90">Unmesh Joshi</span>
             </motion.div>
           </Link>
