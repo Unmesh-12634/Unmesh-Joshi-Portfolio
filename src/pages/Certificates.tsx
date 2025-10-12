@@ -209,7 +209,10 @@ export function Certificates() {
                                 <img
                                   src={cert.image}
                                   alt={`${cert.title} Certificate`}
-                                  className="w-full h-auto rounded-lg border border-primary/30 shadow-lg hover:shadow-primary/20 transition-shadow"
+                                  loading="lazy"
+                                  decoding="async"
+                                  fetchPriority="low"
+                                  className="w-full max-h-[600px] object-contain rounded-lg border border-primary/30 shadow-lg hover:shadow-primary/20 transition-shadow"
                                 />
                                 
                                 {/* Zoom overlay on hover */}
@@ -233,9 +236,9 @@ export function Certificates() {
                               </p>
                             )}
                             
-                            {cert.certificateId && (
+                            {'certificateId' in cert && (
                               <p className="text-xs text-muted-foreground mb-3 font-mono">
-                                Certificate ID: {cert.certificateId}
+                                Certificate ID: {(cert as any).certificateId}
                               </p>
                             )}
                             
