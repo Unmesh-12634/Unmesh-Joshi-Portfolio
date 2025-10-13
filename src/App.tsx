@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Suspense, lazy, useState, useEffect } from 'react';
 
 import { Navbar } from './components/Navbar';
@@ -53,25 +53,19 @@ function AnimatedRoutes() {
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    // Failsafe: ensure preloader doesn't block forever
-    const timeout = setTimeout(() => {
+    // Failsafe to hide preloader in case of an issue
+    const failsafeTimeout = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
-    
-    return () => clearTimeout(timeout);
+    }, 4000); // Should be longer than the preloader's own timeout
+
+    return () => clearTimeout(failsafeTimeout);
   }, []);
 
   const handlePreloaderComplete = () => {
     setIsLoading(false);
   };
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <Router>
@@ -79,7 +73,13 @@ export default function App() {
         {isLoading ? (
           <Preloader key="preloader" onComplete={handlePreloaderComplete} />
         ) : (
-          <div key="app" className="relative min-h-screen overflow-hidden">
+          <motion.div
+            key="app"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative min-h-screen overflow-hidden"
+          >
             {/* Animated Background Scene */}
             <BackgroundScene />
 
@@ -89,15 +89,16 @@ export default function App() {
             {/* Global Toaster for notifications */}
             <Toaster />
 
+            <Navbar />
+
             {/* Content */}
             <div className="relative z-10">
-              <Navbar />
-              <main className="pt-20">
+              <main className="pt-16 sm:pt-20">
                 <AnimatedRoutes />
               </main>
               <Footer />
             </div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </Router>

@@ -23,7 +23,7 @@ export function CursorEffect() {
     <>
       {/* Main cursor glow */}
       <div
-        className="fixed pointer-events-none z-[9999] mix-blend-screen transition-transform duration-100"
+        className="fixed pointer-events-none z-40 mix-blend-screen transition-transform duration-100"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
@@ -38,7 +38,7 @@ export function CursorEffect() {
       
       {/* Ripple effect */}
       <div
-        className="fixed pointer-events-none z-[9998] mix-blend-screen"
+        className="fixed pointer-events-none z-40 mix-blend-screen"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,

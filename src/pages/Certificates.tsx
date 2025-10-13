@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { PageTransition } from '../components/PageTransition';
 import { Card } from '../components/Card';
-import { Award, BookOpen, Trophy, ExternalLink } from 'lucide-react';
+import { Award, BookOpen, Trophy, ExternalLink, Briefcase } from 'lucide-react';
 import { useState } from 'react';
 
 export function Certificates() {
-  const [activeTab, setActiveTab] = useState<'hackathons' | 'courses'>('hackathons');
+  const [activeTab, setActiveTab] = useState<'hackathons' | 'courses' | 'internship'>('hackathons');
   const [selectedCertificate, setSelectedCertificate] = useState<number | null>(null);
 
   const hackathons = [
@@ -93,13 +93,6 @@ export function Certificates() {
       image: '/Courses/Full Stack.png',
     },
     {
-      title: 'CodeSoft',
-      organizer: 'CodeSoft',
-      description: 'Certificate from CodeSoft.',
-      achievement: 'Certificate of Completion',
-      image: '/Courses/CodeSoft.png',
-    },
-    {
       title: 'CyberSecurity',
       organizer: 'IBM',
       description: 'CyberSecurity course.',
@@ -108,7 +101,24 @@ export function Certificates() {
     },
   ];
 
-  const currentData = activeTab === 'hackathons' ? hackathons : courses;
+  const internships = [
+    {
+      title: 'CodeSoft',
+      organizer: 'CodeSoft',
+      description: 'Completed a one-month internship at CodeSoft, gaining hands-on experience in web development and contributing to real-world projects.',
+      achievement: 'Certificate of Completion',
+      image: '/Internship/CodeSoft.png',
+    },
+    {
+      title: 'Cognifyz Internship',
+      organizer: 'Cognifyz',
+      description: 'Successfully completed an internship program at Cognifyz, focusing on data science and machine learning.',
+      achievement: 'Certificate of Completion',
+      image: '/Internship/Cognifyz.png',
+    },
+  ];
+
+  const currentData = activeTab === 'hackathons' ? hackathons : activeTab === 'courses' ? courses : internships;
 
   return (
     <PageTransition>
@@ -125,13 +135,13 @@ export function Certificates() {
         </motion.div>
 
         {/* Tabs */}
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex justify-center flex-wrap gap-4 mb-12">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setActiveTab('hackathons')}
             className={`
-              px-8 py-4 rounded-lg transition-all duration-300 flex items-center gap-3
+              px-4 py-2 md:px-8 md:py-4 rounded-lg transition-all duration-300 flex items-center gap-3
               ${activeTab === 'hackathons'
                 ? 'bg-gradient-to-r from-primary to-secondary text-background'
                 : 'border border-primary text-primary hover:bg-primary/10'
@@ -147,7 +157,7 @@ export function Certificates() {
             whileTap={{ scale: 0.95 }}
             onClick={() => setActiveTab('courses')}
             className={`
-              px-8 py-4 rounded-lg transition-all duration-300 flex items-center gap-3
+              px-4 py-2 md:px-8 md:py-4 rounded-lg transition-all duration-300 flex items-center gap-3
               ${activeTab === 'courses'
                 ? 'bg-gradient-to-r from-primary to-secondary text-background'
                 : 'border border-secondary text-secondary hover:bg-secondary/10'
@@ -156,6 +166,21 @@ export function Certificates() {
           >
             <BookOpen className="w-5 h-5" />
             Courses & Certifications
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setActiveTab('internship')}
+            className={`
+              px-4 py-2 md:px-8 md:py-4 rounded-lg transition-all duration-300 flex items-center gap-3
+              ${activeTab === 'internship'
+                ? 'bg-gradient-to-r from-primary to-secondary text-background'
+                : 'border border-primary text-primary hover:bg-primary/10'
+              }
+            `}
+          >
+            <Briefcase className="w-5 h-5" />
+            Internship
           </motion.button>
         </div>
 
@@ -177,16 +202,16 @@ export function Certificates() {
                 transition={{ delay: index * 0.1 }}
               >
                 <Card
-                  glowColor={activeTab === 'hackathons' ? 'primary' : 'secondary'}
+                  glowColor={activeTab === 'hackathons' ? 'primary' : activeTab === 'courses' ? 'secondary' : 'primary'}
                   onClick={() => setSelectedCertificate(selectedCertificate === index ? null : index)}
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`w-12 h-12 rounded-lg ${activeTab === 'hackathons' ? 'bg-primary/20' : 'bg-secondary/20'} flex items-center justify-center flex-shrink-0`}>
-                      <Award className={`w-6 h-6 ${activeTab === 'hackathons' ? 'text-primary' : 'text-secondary'}`} />
+                    <div className={`w-12 h-12 rounded-lg ${activeTab === 'hackathons' ? 'bg-primary/20' : activeTab === 'courses' ? 'bg-secondary/20' : 'bg-primary/20'} flex items-center justify-center flex-shrink-0`}>
+                      <Award className={`w-6 h-6 ${activeTab === 'hackathons' ? 'text-primary' : activeTab === 'courses' ? 'text-secondary' : 'text-primary'}`} />
                     </div>
                     <div className="flex-grow">
                       <h3 className="text-xl mb-2">{cert.title}</h3>
-                      <p className={`${activeTab === 'hackathons' ? 'text-primary' : 'text-secondary'} text-sm mb-3`}>
+                      <p className={`${activeTab === 'hackathons' ? 'text-primary' : activeTab === 'courses' ? 'text-secondary' : 'text-primary'} text-sm mb-3`}>
                         {cert.organizer}
                       </p>
                       

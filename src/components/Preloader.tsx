@@ -47,7 +47,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
+      className="fixed inset-0 z-[10000] flex items-center justify-center bg-background"
     >
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
