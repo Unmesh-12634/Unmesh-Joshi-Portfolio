@@ -10,6 +10,14 @@ export function Certificates() {
 
   const hackathons = [
     {
+      title: 'Hack with UP',
+      organizer: 'HackerRank',
+      description: 'Certificate of participation in Hack with UP hackathon organized by HackerRank. This event brought together developers and problem solvers to create innovative solutions.',
+      achievement: 'Certificate of Participation',
+      image: '/Hackathons/HackWithUP.png',
+      date: '2025',
+    },
+    {
       title: 'BuildwithDelhi 2.0',
       organizer: 'HackWithIndia',
       description: 'Secured a position in the Top 40 at BuildwithDelhi 2.0, conducted by HackWithIndia at Microsoft Gurgaon. Demonstrated remarkable innovation, skills, and performance during the hackathon. The contribution stood out and was sincerely celebrated.',
@@ -296,7 +304,7 @@ export function Certificates() {
         >
           <div className="text-center p-6 rounded-lg bg-card/50 backdrop-blur-sm border border-primary/20">
             <div className="text-4xl mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              10
+              11
             </div>
             <p className="text-sm text-muted-foreground">Hackathons</p>
           </div>
@@ -310,7 +318,7 @@ export function Certificates() {
           
           <div className="text-center p-6 rounded-lg bg-card/50 backdrop-blur-sm border border-primary/20">
             <div className="text-4xl mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              18
+              19
             </div>
             <p className="text-sm text-muted-foreground">Total Earned</p>
           </div>

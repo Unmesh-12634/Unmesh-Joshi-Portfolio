@@ -38,7 +38,7 @@ export function Home() {
               Full Stack Developer
             </p>
             <p className="text-xl md:text-2xl text-primary/80">
-              AI & ML Enthusiast
+              AI & ML Enthusiast | HackerRank Ambassador
             </p>
           </motion.div>
 
@@ -49,7 +49,7 @@ export function Home() {
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12"
           >
             Building intelligent solutions that bridge creativity and technology.
-            Passionate about crafting seamless digital experiences.
+            Passionate about crafting seamless digital experiences. Proudly serving as a HackerRank Ambassador.
           </motion.p>
 
           <motion.div

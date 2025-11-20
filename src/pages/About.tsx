@@ -89,6 +89,7 @@ export function About() {
                       <div>
                         <h3 className="font-semibold text-white">Unmesh Joshi</h3>
                         <p className="text-sm text-[#00e5ff]">Full Stack Developer & AI Enthusiast</p>
+                        <p className="text-xs text-[#7c4dff] mt-1">HackerRank Ambassador</p>
                       </div>
                     </div>
                   </motion.div>
@@ -136,6 +137,8 @@ export function About() {
                 I'm <span className="text-[#00e5ff] font-semibold">Unmesh Joshi</span>, a B.Tech CSE student from{' '}
                 <span className="text-[#7c4dff] font-semibold">Techno India NJR, Udaipur</span>, 
                 passionate about building technology that connects creativity and intelligence. 
+                As a <span className="text-[#00e5ff] font-semibold">HackerRank Ambassador</span>, I actively 
+                engage with the developer community, promoting problem-solving and competitive programming.
                 I believe in the power of code to transform ideas into reality and create 
                 meaningful digital experiences that make a difference.
               </p>

@@ -17,6 +17,7 @@ const Projects = lazy(() => import('./pages/Projects').then(module => ({ default
 const Certificates = lazy(() => import('./pages/Certificates').then(module => ({ default: module.Certificates })));
 const Experience = lazy(() => import('./pages/Experience').then(module => ({ default: module.Experience })));
 const Journey = lazy(() => import('./pages/Journey').then(module => ({ default: module.Journey })));
+const Events = lazy(() => import('./pages/Events').then(module => ({ default: module.Events })));
 const Contact = lazy(() => import('./pages/Contact').then(module => ({ default: module.Contact })));
 
 function AnimatedRoutes() {
@@ -42,6 +43,7 @@ function AnimatedRoutes() {
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/journey" element={<Journey />} />
+          <Route path="/events" element={<Events />} />
           <Route path="/contact" element={<Contact />} />
           {/* Catch-all route - redirect to home */}
           <Route path="*" element={<Navigate to="/" replace />} />
