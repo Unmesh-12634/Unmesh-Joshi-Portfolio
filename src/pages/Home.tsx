@@ -588,10 +588,9 @@ export function Home() {
   ];
 
   const timeline = [
-    { year: '2023', description: 'Started Programming & mastering algorithms' },
-    { year: '2024', description: 'Built Full Stack Applications with React/Node.js' },
-    { year: '2025', description: 'Hackathons & Technical Team Leadership' },
-    { year: '2026', description: 'AI Systems Integration & Product Building' },
+    { year: '2024', description: 'Started B.Tech, Mastered Programming & Algorithms' },
+    { year: '2025', description: 'Built Full Stack Applications, Hackathons & Team Leadership' },
+    { year: '2026', description: 'AI Systems Integration & Product Building (Ongoing)' },
   ];
 
   const certificates = [
