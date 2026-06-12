@@ -69,6 +69,23 @@ const experiences: ExperienceItem[] = [
     }
   },
   {
+    icon: Users,
+    title: 'HackerRank Ambassador',
+    role: 'College Ambassador',
+    date: '2024 - Present',
+    description: 'Serving as the official HackerRank College Ambassador on campus, promoting competitive programming, organizing technical contests, and fostering data structures & algorithms problem-solving culture among students.',
+    achievements: [
+      'Organized and hosted multiple campus-wide coding contests and hackathons on the HackerRank platform.',
+      'Mentored and guided fellow students in strengthening their DSA concepts and preparing for technical interviews.',
+      'Represented HackerRank locally, bridging the gap between student programming communities and industry hiring standards.',
+    ],
+    systemMetrics: {
+      calibration: '98.8% EXCELLENT',
+      load: '15.4% STEADY',
+      integrity: '100% SECURE'
+    }
+  },
+  {
     icon: Rocket,
     title: 'Current Focus',
     role: 'AI Systems Integration',

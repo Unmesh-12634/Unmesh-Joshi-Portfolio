@@ -72,6 +72,7 @@ export function Journey() {
       icon: Users,
       description: 'Became an active member of the tech community, participating in events and exploring the world of development.',
       highlights: [
+        'Appointed HackerRank College Ambassador to drive campus coding',
         'Joined college tech communities',
         'Began participating in coding events',
         'Started exploring the world of development',

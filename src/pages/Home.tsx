@@ -588,7 +588,7 @@ export function Home() {
   ];
 
   const timeline = [
-    { year: '2024', description: 'Started B.Tech, Mastered Programming & Algorithms' },
+    { year: '2024', description: 'Started B.Tech, Appointed HackerRank Ambassador & Mastered Algorithms' },
     { year: '2025', description: 'Built Full Stack Applications, Hackathons & Team Leadership' },
     { year: '2026', description: 'AI Systems Integration & Product Building (Ongoing)' },
   ];

@@ -121,6 +121,11 @@ export function About() {
                       for building <strong className="text-sohub-white">Meducators</strong> — an AI-powered medical learning platform focused on enhancing healthcare education through intelligent learning experiences.
                     </p>
                     <p>
+                      Beyond building systems, I serve as the{' '}
+                      <strong className="text-sohub-white">HackerRank College Ambassador</strong>{' '}
+                      for my campus. In this role, I organize coding contests, mentor fellow students in data structures and algorithms, and drive a vibrant competitive coding culture on campus.
+                    </p>
+                    <p>
                       I believe great products emerge from the intersection of{' '}
                       <strong className="text-sohub-white">engineering, creativity, and problem-solving</strong>.
                       Whether developing AI workflows, designing full-stack systems, or collaborating with a team —
@@ -140,7 +145,7 @@ export function About() {
                   {[
                     { label: 'AI & Machine Learning', detail: 'RAG systems, computer vision, LLM integration, model deployment' },
                     { label: 'Full-Stack Engineering', detail: 'React, Next.js, Node.js, FastAPI, SQL/NoSQL databases' },
-                    { label: 'Hackathon Leadership', detail: '20+ national competitions, team lead, ideation to execution' },
+                    { label: 'Community & Leadership', detail: 'HackerRank College Ambassador, tech community mentor, and leading 20+ national hackathon teams' },
                     { label: 'Product Design', detail: 'Interactive UI/UX, Three.js, real-world impact-driven builds' },
                   ].map(({ label, detail }) => (
                     <div key={label} className="border border-sohub-dark-grey bg-sohub-dark-grey/10 p-5 hover:border-sohub-white/20 transition-colors">
