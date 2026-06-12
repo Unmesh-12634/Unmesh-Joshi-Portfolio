@@ -582,7 +582,7 @@ export function FooterSection() {
           </div>
 
           {/* ── Nav links (col-span 5) ── */}
-          <div className="lg:col-span-5 grid grid-cols-3 gap-6">
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {NAV_SECTIONS.map((section, si) => (
               <Reveal key={section.title} delay={0.1 + si * 0.06} className="space-y-4">
                 <div>

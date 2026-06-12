@@ -399,6 +399,16 @@ export function Home() {
   const robotInnerRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number>(0);
   const mouseNorm = useRef({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Look-at updates for Spline 3D elements and DOM parallax (no-render state)
   useEffect(() => {
@@ -687,48 +697,71 @@ export function Home() {
               </motion.div>
             </div>
 
-            {/* Right Column: Spline 3D Robot Scene (Enlarged Container) */}
+            {/* Right Column: Spline 3D Robot Scene (Enlarged Container) or Interactive Mobile Fallback */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="lg:col-span-6 h-[400px] md:h-[550px] lg:h-[650px] w-full relative flex items-center justify-center"
+              className="lg:col-span-6 h-[320px] sm:h-[500px] lg:h-[650px] w-full relative flex items-center justify-center overflow-hidden"
             >
-              {/* CSS 3D perspective wrapper for mouse-tilt parallax */}
-              <div
-                ref={robotContainerRef}
-                onClick={handleRobotClick}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  perspective: '900px',
-                  cursor: 'pointer',
-                  transition: 'transform 0.05s linear',
-                }}
-              >
+              {!isMobile ? (
+                /* CSS 3D perspective wrapper for mouse-tilt parallax */
                 <div
-                  ref={robotInnerRef}
+                  ref={robotContainerRef}
+                  onClick={handleRobotClick}
                   style={{
                     width: '100%',
                     height: '100%',
-                    transform: 'rotateX(0deg) rotateY(0deg)',
-                    transformStyle: 'preserve-3d',
-                    transition: 'transform 0.12s ease-out',
-                    willChange: 'transform',
+                    perspective: '900px',
+                    cursor: 'pointer',
+                    transition: 'transform 0.05s linear',
                   }}
                 >
-                  <SplineScene
-                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                    className="w-full h-full"
-                    onLoad={onSplineLoad}
-                  />
+                  <div
+                    ref={robotInnerRef}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      transform: 'rotateX(0deg) rotateY(0deg)',
+                      transformStyle: 'preserve-3d',
+                      transition: 'transform 0.12s ease-out',
+                      willChange: 'transform',
+                    }}
+                  >
+                    <SplineScene
+                      scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                      className="w-full h-full"
+                      onLoad={onSplineLoad}
+                    />
+                  </div>
                 </div>
-              </div>
+              ) : (
+                /* Beautiful, smooth CSS Interactive glowing orb for mobile to prevent lag */
+                <div className="w-full h-full flex items-center justify-center relative">
+                  <div className="absolute w-64 h-64 bg-gradient-to-tr from-[#4285F4]/20 via-[#EA4335]/20 to-[#FBBC05]/20 rounded-full blur-[60px] animate-pulse" />
+                  <div className="relative w-44 h-44 border border-white/10 rounded-full flex items-center justify-center bg-black/40 backdrop-blur-md shadow-[0_0_50px_rgba(255,255,255,0.05)]">
+                    {/* Glowing outer rings */}
+                    <div className="absolute inset-2 border border-[#4285F4]/30 rounded-full animate-[spin_8s_linear_infinite]" />
+                    <div className="absolute inset-4 border border-t-[#EA4335]/40 border-b-[#FBBC05]/40 border-l-transparent border-r-transparent rounded-full animate-[spin_4s_linear_infinite_reverse]" />
+                    
+                    {/* Inner core */}
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-white/90 via-sohub-grey to-zinc-900 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.3)] animate-pulse">
+                      <Cpu className="w-7 h-7 text-black animate-pulse" />
+                    </div>
+                  </div>
+                  {/* Decorative particles */}
+                  <div className="absolute w-2 h-2 bg-[#34A853] rounded-full blur-[1px] top-1/4 left-1/4 animate-bounce" />
+                  <div className="absolute w-1.5 h-1.5 bg-[#4285F4] rounded-full blur-[1px] bottom-1/3 right-1/4 animate-ping" />
+                </div>
+              )}
+
               {/* Hint label */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[9px] font-mono text-sohub-grey/50 uppercase tracking-widest select-none pointer-events-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-sohub-grey/40 animate-ping" />
-                Click or move cursor to interact
-              </div>
+              {!isMobile && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[9px] font-mono text-sohub-grey/50 uppercase tracking-widest select-none pointer-events-none">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sohub-grey/40 animate-ping" />
+                  Click or move cursor to interact
+                </div>
+              )}
             </motion.div>
           </div>
         </section>

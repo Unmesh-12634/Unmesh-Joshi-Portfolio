@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -18,11 +18,23 @@ const Experience = lazy(() => import('./pages/Experience').then(module => ({ def
 const Journey = lazy(() => import('./pages/Journey').then(module => ({ default: module.Journey })));
 const Contact = lazy(() => import('./pages/Contact').then(module => ({ default: module.Contact })));
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function AnimatedRoutes() {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
+    <>
+      <ScrollToTop />
+      <AnimatePresence mode="wait">
       <Suspense
         fallback={
           <div className="min-h-screen flex items-center justify-center bg-background">
@@ -47,7 +59,8 @@ function AnimatedRoutes() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
-    </AnimatePresence>
+      </AnimatePresence>
+    </>
   );
 }
 
