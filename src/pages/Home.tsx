@@ -588,9 +588,9 @@ export function Home() {
   ];
 
   const timeline = [
-    { year: '2024', description: 'Started B.Tech, Appointed HackerRank Ambassador & Mastered Algorithms' },
-    { year: '2025', description: 'Built Full Stack Applications, Hackathons & Team Leadership' },
-    { year: '2026', description: 'AI Systems Integration & Product Building (Ongoing)' },
+    { year: '2024', description: 'Started B.Tech, Learning Basic Programming, Core Languages & Web Dev' },
+    { year: '2025', description: 'Appointed HackerRank Ambassador, Learning AI/ML & Participating in Hackathons' },
+    { year: '2026', description: 'Continuing AI/ML & Building AI-Powered Tools & RAG Systems (Ongoing)' },
   ];
 
   const certificates = [

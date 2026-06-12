@@ -72,7 +72,6 @@ export function Journey() {
       icon: Users,
       description: 'Became an active member of the tech community, participating in events and exploring the world of development.',
       highlights: [
-        'Appointed HackerRank College Ambassador to drive campus coding',
         'Joined college tech communities',
         'Began participating in coding events',
         'Started exploring the world of development',
@@ -112,6 +111,7 @@ export function Journey() {
       icon: Trophy,
       description: 'Gained hands-on experience and teamwork skills by participating in 10+ hackathons and leading multiple teams.',
       highlights: [
+        'Appointed HackerRank College Ambassador to drive campus coding',
         'Participated in my first hackathon, top 40 finalist at Microsoft Gurugram',
         'Led multiple teams in hackathons and college projects',
         'Represented my college in Smart India Hackathon (SIH) internal rounds',

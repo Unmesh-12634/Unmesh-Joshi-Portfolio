@@ -72,7 +72,7 @@ const experiences: ExperienceItem[] = [
     icon: Users,
     title: 'HackerRank Ambassador',
     role: 'College Ambassador',
-    date: '2024 - Present',
+    date: '2025 - Present',
     description: 'Serving as the official HackerRank College Ambassador on campus, promoting competitive programming, organizing technical contests, and fostering data structures & algorithms problem-solving culture among students.',
     achievements: [
       'Organized and hosted multiple campus-wide coding contests and hackathons on the HackerRank platform.',
