@@ -1,12 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'motion/react';
-import { Suspense, lazy, useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Suspense, lazy } from 'react';
 
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { CursorEffect } from './components/CursorEffect';
 import { BackgroundScene } from './components/BackgroundScene';
-import { Preloader } from './components/Preloader';
 import { Toaster } from './components/ui/sonner';
 
 // Lazy load pages for better performance
@@ -15,6 +13,7 @@ const About = lazy(() => import('./pages/About').then(module => ({ default: modu
 const Skills = lazy(() => import('./pages/Skills').then(module => ({ default: module.Skills })));
 const Projects = lazy(() => import('./pages/Projects').then(module => ({ default: module.Projects })));
 const Certificates = lazy(() => import('./pages/Certificates').then(module => ({ default: module.Certificates })));
+const Hackathons = lazy(() => import('./pages/Hackathons').then(module => ({ default: module.Hackathons })));
 const Experience = lazy(() => import('./pages/Experience').then(module => ({ default: module.Experience })));
 const Journey = lazy(() => import('./pages/Journey').then(module => ({ default: module.Journey })));
 const Contact = lazy(() => import('./pages/Contact').then(module => ({ default: module.Contact })));
@@ -26,10 +25,10 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Suspense
         fallback={
-          <div className="min-h-screen flex items-center justify-center">
+          <div className="min-h-screen flex items-center justify-center bg-background">
             <div className="text-center">
               <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-              <p className="text-primary">Loading...</p>
+              <p className="text-primary font-mono text-xs uppercase tracking-widest">Loading...</p>
             </div>
           </div>
         }
@@ -40,6 +39,7 @@ function AnimatedRoutes() {
           <Route path="/skills" element={<Skills />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/certificates" element={<Certificates />} />
+          <Route path="/hackathons" element={<Hackathons />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/journey" element={<Journey />} />
           <Route path="/contact" element={<Contact />} />
@@ -52,54 +52,31 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    // Failsafe: ensure preloader doesn't block forever
-    const timeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-    
-    return () => clearTimeout(timeout);
-  }, []);
-
-  const handlePreloaderComplete = () => {
-    setIsLoading(false);
-  };
-
-  if (!mounted) {
-    return null;
-  }
-
   return (
     <Router>
-      <AnimatePresence mode="wait">
-        {isLoading ? (
-          <Preloader key="preloader" onComplete={handlePreloaderComplete} />
-        ) : (
-          <div key="app" className="relative min-h-screen overflow-hidden">
-            {/* Animated Background Scene */}
-            <BackgroundScene />
+      <motion.div
+        key="app"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="relative min-h-screen overflow-hidden"
+      >
+        {/* Animated Background Scene */}
+        <BackgroundScene />
 
-            {/* Custom Cursor */}
-            <CursorEffect />
+        {/* Global Toaster for notifications */}
+        <Toaster />
 
-            {/* Global Toaster for notifications */}
-            <Toaster />
+        <Navbar />
 
-            {/* Content */}
-            <div className="relative z-10">
-              <Navbar />
-              <main className="pt-20">
-                <AnimatedRoutes />
-              </main>
-              <Footer />
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
+        {/* Content */}
+        <div className="relative z-10">
+          <main className="pt-16 sm:pt-20">
+            <AnimatedRoutes />
+          </main>
+          <Footer />
+        </div>
+      </motion.div>
     </Router>
   );
 }

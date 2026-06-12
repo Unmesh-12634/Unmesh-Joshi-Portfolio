@@ -1,256 +1,221 @@
-import { motion } from 'motion/react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PageTransition } from '../components/PageTransition';
-import { Card } from '../components/Card';
-import { GraduationCap, Heart, Music, Code2, Sparkles, Brain, Zap } from 'lucide-react';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import profilePic from '../assets/profile.jpeg';
+import { Target, BookOpen, Globe, ArrowUpRight } from 'lucide-react';
+import { useTheme } from 'next-themes';
+
+
+// Reusable Interactive 3D Tilt Card Component
+interface TiltCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+  className?: string;
+}
+
+function TiltCard({ children, className, style, ...props }: TiltCardProps) {
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const xc = rect.width / 2;
+    const yc = rect.height / 2;
+    setRotateX((yc - y) / 15);
+    setRotateY((x - xc) / 15);
+  };
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setRotateX(0);
+    setRotateY(0);
+  };
+
+  const shadow = resolvedTheme === 'light' 
+    ? (isHovered ? '0 20px 40px rgba(12, 16, 22, 0.08), 0 1px 3px rgba(12, 16, 22, 0.02)' : '0 10px 20px rgba(12, 16, 22, 0.03), 0 1px 2px rgba(12, 16, 22, 0.01)')
+    : (isHovered ? '0 30px 60px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.4)' : '0 15px 30px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3)');
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`transition-all duration-300 ${className}`}
+      style={{
+        transform: isHovered 
+          ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)` 
+          : 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)',
+        transformStyle: 'preserve-3d',
+        boxShadow: shadow,
+        ...style
+      }}
+      {...props}
+    >
+      <div style={{ transform: isHovered ? 'translateZ(25px)' : 'translateZ(0px)', transition: 'transform 0.2s ease-out' }}>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export function About() {
-  const hobbies = [
-    { icon: Code2, label: 'Coding', color: 'text-[#00e5ff]' },
-    { icon: Brain, label: 'Learning AI', color: 'text-[#7c4dff]' },
-    { icon: Music, label: 'Music', color: 'text-[#00e5ff]' },
-    { icon: Heart, label: 'Design', color: 'text-[#7c4dff]' },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  };
+  const { resolvedTheme } = useTheme();
 
   return (
     <PageTransition>
-      <div className="container mx-auto px-6 py-24 md:py-32">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-6xl mb-4 bg-gradient-to-r from-[#00e5ff] to-[#7c4dff] bg-clip-text text-transparent">
-            About Me
-          </h1>
-          <p className="text-muted-foreground text-lg">Get to know the person behind the code</p>
-        </motion.div>
+      <div className="bg-sohub-black text-sohub-white min-h-screen overflow-x-hidden relative">
+        
+        {/* Soft Ambient Background Highlights */}
+        <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-sohub-dark-grey/5 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[600px] h-[600px] rounded-full bg-sohub-dark-grey/5 blur-[140px] pointer-events-none" />
 
-        {/* Main Content Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto mb-20"
-        >
-          {/* Left Column - Portrait and Quick Info */}
-          <motion.div variants={itemVariants} className="space-y-6">
-            {/* Profile Image Card */}
-            <Card glowColor="primary" className="overflow-hidden">
-              <div className="relative group">
-                {/* Image Container */}
-                <div className="relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-[#00e5ff]/10 to-[#7c4dff]/10">
-                  <ImageWithFallback
-                    src={profilePic}
-                    alt="Unmesh Joshi - Developer Workspace"
-                    className="w-full h-full object-cover"
-                  />
-                  
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-transparent to-transparent opacity-60" />
-                  
-                  {/* Floating badge */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 }}
-                    className="absolute bottom-4 left-4 right-4 backdrop-blur-md bg-[#0a0f1a]/80 rounded-lg p-4 border border-[#00e5ff]/20"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00e5ff] to-[#7c4dff] flex items-center justify-center">
-                        <Sparkles className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-white">Unmesh Joshi</h3>
-                        <p className="text-sm text-[#00e5ff]">Full Stack Developer & AI Enthusiast</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Decorative corner accents */}
-                <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-[#00e5ff]/40 rounded-tl-lg" />
-                <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-[#7c4dff]/40 rounded-br-lg" />
-              </div>
-            </Card>
-
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 gap-4">
-              <motion.div
-                whileHover={{ scale: 1.05, rotateZ: 2 }}
-                className="bg-gradient-to-br from-[#00e5ff]/10 to-[#00e5ff]/5 rounded-xl p-4 border border-[#00e5ff]/20 backdrop-blur-sm"
-              >
-                <Zap className="w-8 h-8 text-[#00e5ff] mb-2" />
-                <p className="text-2xl font-bold text-white">10</p>
-                <p className="text-sm text-muted-foreground">Hackathons</p>
-              </motion.div>
-              
-              <motion.div
-                whileHover={{ scale: 1.05, rotateZ: -2 }}
-                className="bg-gradient-to-br from-[#7c4dff]/10 to-[#7c4dff]/5 rounded-xl p-4 border border-[#7c4dff]/20 backdrop-blur-sm"
-              >
-                <Brain className="w-8 h-8 text-[#7c4dff] mb-2" />
-                <p className="text-2xl font-bold text-white">Fullstack</p>
-                <p className="text-sm text-muted-foreground">& AI/ML</p>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Right Column - Bio and Interests */}
-          <motion.div variants={itemVariants} className="space-y-6">
-            {/* Who I Am */}
-            <Card glowColor="secondary">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7c4dff] to-[#00e5ff] flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-5 h-5 text-white" />
-                </div>
-                <h2 className="text-2xl text-[#00e5ff]">Who I Am</h2>
-              </div>
-              <p className="text-foreground/90 leading-relaxed">
-                I'm <span className="text-[#00e5ff] font-semibold">Unmesh Joshi</span>, a B.Tech CSE student from{' '}
-                <span className="text-[#7c4dff] font-semibold">Techno India NJR, Udaipur</span>, 
-                passionate about building technology that connects creativity and intelligence. 
-                I believe in the power of code to transform ideas into reality and create 
-                meaningful digital experiences that make a difference.
-              </p>
-            </Card>
-
-            {/* My Interests */}
-            <Card glowColor="primary">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00e5ff] to-[#7c4dff] flex items-center justify-center flex-shrink-0">
-                  <Heart className="w-5 h-5 text-white" />
-                </div>
-                <h2 className="text-2xl text-[#7c4dff]">My Interests</h2>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {hobbies.map((hobby, index) => (
-                  <motion.div
-                    key={hobby.label}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.6 + index * 0.1 }}
-                    whileHover={{ 
-                      scale: 1.08, 
-                      rotateZ: index % 2 === 0 ? 3 : -3,
-                      transition: { duration: 0.2 }
-                    }}
-                    className="flex items-center gap-3 p-4 rounded-lg bg-gradient-to-br from-muted/30 to-muted/10 border border-white/5 hover:border-white/20 transition-all cursor-pointer group"
-                  >
-                    <hobby.icon className={`w-6 h-6 ${hobby.color} group-hover:scale-110 transition-transform`} />
-                    <span className="font-medium">{hobby.label}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </Card>
-
-            {/* Vision Statement */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="relative overflow-hidden rounded-xl p-6 bg-gradient-to-br from-[#00e5ff]/10 via-[#7c4dff]/10 to-[#00e5ff]/10 border border-[#00e5ff]/20 backdrop-blur-sm"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00e5ff]/5 to-[#7c4dff]/5 animate-pulse" />
-              <div className="relative z-10">
-                <p className="text-center text-foreground/80 italic">
-                  "Creating the future, one line of code at a time"
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        {/* Education & Focus Timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className="max-w-5xl mx-auto"
-        >
-          <h2 className="text-3xl md:text-4xl text-center mb-12 bg-gradient-to-r from-[#00e5ff] to-[#7c4dff] bg-clip-text text-transparent">
-            Education & Focus
-          </h2>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28 relative z-10">
           
-          <div className="space-y-6">
-            {/* Education Card */}
-            <motion.div
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Card glowColor="primary">
-                <div className="flex items-start gap-6">
-                  <motion.div 
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00e5ff]/20 to-[#00e5ff]/10 border border-[#00e5ff]/30 flex items-center justify-center flex-shrink-0"
-                  >
-                    <GraduationCap className="w-8 h-8 text-[#00e5ff]" />
-                  </motion.div>
-                  <div className="flex-1">
-                    <h3 className="text-xl md:text-2xl mb-2 text-white">B.Tech in Computer Science & Engineering</h3>
-                    <p className="text-[#00e5ff] mb-3 font-medium">Techno India NJR, Udaipur</p>
-                    <p className="text-foreground/80 leading-relaxed">
-                      Specializing in Full Stack Development and Artificial Intelligence, 
-                      focusing on building intelligent systems that solve real-world problems.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-
-            {/* Current Focus Card */}
-            <motion.div
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Card glowColor="secondary">
-                <div className="flex items-start gap-6">
-                  <motion.div 
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#7c4dff]/20 to-[#7c4dff]/10 border border-[#7c4dff]/30 flex items-center justify-center flex-shrink-0"
-                  >
-                    <Code2 className="w-8 h-8 text-[#7c4dff]" />
-                  </motion.div>
-                  <div className="flex-1">
-                    <h3 className="text-xl md:text-2xl mb-2 text-white">Current Focus</h3>
-                    <p className="text-[#7c4dff] mb-3 font-medium">AI-Integrated Full Stack Applications</p>
-                    <p className="text-foreground/80 leading-relaxed">
-                      Building intelligent web applications that leverage machine learning 
-                      and AI to create smarter, more intuitive user experiences.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
+          {/* Header Title */}
+          <div className="border-b border-sohub-dark-grey pb-8 mb-16">
+            <span className="text-xxs uppercase tracking-widest text-sohub-grey font-semibold block mb-2">Studio & Bio</span>
+            <h1 className="text-4xl md:text-7xl font-display-title font-extrabold uppercase leading-none text-sohub-white">
+              ABOUT UNMESH
+            </h1>
           </div>
-        </motion.div>
+
+          {/* Main Layout Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Column: Biography & Core Focus (lg:col-span-7) */}
+            <div className="lg:col-span-7 space-y-12">
+              
+              {/* Bio Block: Narrative Biography */}
+              <div className="space-y-4">
+                <span className="text-xxs uppercase tracking-widest text-sohub-grey font-bold flex items-center gap-1.5">
+                  <Target className="w-3.5 h-3.5 text-sohub-white" /> Biography
+                </span>
+                
+                <TiltCard className="border border-sohub-dark-grey bg-sohub-dark-grey/15 p-8 md:p-12 hover:border-sohub-white/20">
+                  <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight text-sohub-white font-display mb-6">
+                    Engineering intelligent systems.<br />Building experiences that matter.
+                  </h2>
+                  <div className="space-y-4 text-xs md:text-sm text-sohub-grey font-medium leading-relaxed">
+                    <p>
+                      I'm a{' '}
+                      <strong className="text-sohub-white">B.Tech Computer Science &amp; Engineering student</strong>{' '}
+                      at <strong className="text-sohub-white">Techno India NJR, Udaipur</strong>, focused on{' '}
+                      <strong className="text-sohub-white">Artificial Intelligence</strong>,{' '}
+                      <strong className="text-sohub-white">Machine Learning</strong>, and{' '}
+                      <strong className="text-sohub-white">Full-Stack Development</strong>.
+                      My work revolves around building intelligent systems, AI-powered products, and scalable web applications that combine strong engineering with meaningful user experiences.
+                    </p>
+                    <p>
+                      I've built everything from{' '}
+                      <strong className="text-sohub-white">RAG pipelines</strong> and computer vision models to full-stack platforms and interactive digital products —
+                      always translating complex ideas into practical, real-world solutions.
+                    </p>
+                    <p>
+                      Competing in{' '}
+                      <strong className="text-sohub-white">20+ national-level hackathons</strong>{' '}
+                      and leading teams across AI and software engineering domains, my team secured{' '}
+                      <strong className="text-sohub-white">1st Place at Google Lakecity Hackathon 2026</strong>{' '}
+                      for building <strong className="text-sohub-white">Meducators</strong> — an AI-powered medical learning platform focused on enhancing healthcare education through intelligent learning experiences.
+                    </p>
+                    <p>
+                      I believe great products emerge from the intersection of{' '}
+                      <strong className="text-sohub-white">engineering, creativity, and problem-solving</strong>.
+                      Whether developing AI workflows, designing full-stack systems, or collaborating with a team —
+                      the goal stays the same: build technology that creates measurable impact.
+                    </p>
+                  </div>
+                </TiltCard>
+              </div>
+
+              {/* Research Block: Core Focus Areas */}
+              <div className="space-y-4 pt-4 border-t border-sohub-dark-grey/50">
+                <span className="text-xxs uppercase tracking-widest text-sohub-grey font-bold flex items-center gap-1.5">
+                  <BookOpen className="w-3.5 h-3.5 text-sohub-white" /> Core Focus Areas
+                </span>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    { label: 'AI & Machine Learning', detail: 'RAG systems, computer vision, LLM integration, model deployment' },
+                    { label: 'Full-Stack Engineering', detail: 'React, Next.js, Node.js, FastAPI, SQL/NoSQL databases' },
+                    { label: 'Hackathon Leadership', detail: '20+ national competitions, team lead, ideation to execution' },
+                    { label: 'Product Design', detail: 'Interactive UI/UX, Three.js, real-world impact-driven builds' },
+                  ].map(({ label, detail }) => (
+                    <div key={label} className="border border-sohub-dark-grey bg-sohub-dark-grey/10 p-5 hover:border-sohub-white/20 transition-colors">
+                      <h4 className="text-[11px] font-bold text-sohub-white uppercase tracking-wider mb-1.5">{label}</h4>
+                      <p className="text-[11px] text-sohub-grey leading-relaxed">{detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column: Profile Photo + Vision (lg:col-span-5) */}
+            <div className="lg:col-span-5 space-y-6">
+
+              {/* Profile Photo Card — top-aligned with Biography */}
+              <TiltCard className="border border-sohub-dark-grey hover:border-sohub-white/30 overflow-hidden group relative">
+                <div className="relative h-[480px] overflow-hidden">
+                  <img
+                    src="/profile.jpg"
+                    alt="Unmesh Joshi"
+                    className="w-full h-full object-cover object-[center_10%] transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Black scrim at bottom for label */}
+                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+
+                  {/* Name / Role label */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-white/50 block mb-1">UNMESH JOSHI</span>
+                    <span className="text-[12px] font-bold uppercase tracking-wider text-white">AI Engineer · Full-Stack Developer</span>
+                  </div>
+
+                  {/* Top-right status badge */}
+                  <div className="absolute top-4 right-4 bg-black/60 border border-white/10 px-2.5 py-1 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse block" />
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-white/70">Available</span>
+                  </div>
+                </div>
+              </TiltCard>
+
+              {/* Vision Statement Box */}
+              <TiltCard className="border border-sohub-dark-grey bg-sohub-dark-grey/15 p-8 hover:border-sohub-white/20 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-r from-sohub-white/2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <p className="text-xs italic text-sohub-grey leading-relaxed relative z-10">
+                  "Digital interaction shouldn't be passive. I design web ecosystems that breathe, react, and respond to human actions, merging strict system utility with visceral visual delight."
+                </p>
+                <div className="flex justify-end mt-4 relative z-10">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-sohub-white flex items-center gap-1">
+                    Philosophy <ArrowUpRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </TiltCard>
+
+              {/* Interactive Info Footer */}
+              <div className="pt-2 flex items-center gap-3 text-xxs font-bold text-sohub-grey tracking-widest uppercase pointer-events-none select-none">
+                <Globe className="w-4 h-4 text-sohub-white animate-spin-slow animate-pulse" /> Hover on cards to tilt
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
+
+      <style>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 8s linear infinite;
+        }
+      `}</style>
     </PageTransition>
   );
 }
