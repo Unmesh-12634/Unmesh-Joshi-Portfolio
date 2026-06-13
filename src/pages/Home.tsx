@@ -401,6 +401,15 @@ export function Home() {
   const mouseNorm = useRef({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
 
+  // HUD Direct DOM Mutation Refs (Bypasses React re-renders for smooth 60fps)
+  const hudXCoordRef = useRef<HTMLSpanElement>(null);
+  const hudYCoordRef = useRef<HTMLSpanElement>(null);
+  const hudFpsRef = useRef<HTMLSpanElement>(null);
+  const scanningOverlayRef = useRef<HTMLDivElement>(null);
+  const scanningTextRef = useRef<HTMLSpanElement>(null);
+  const hudStatusDotRef = useRef<HTMLDivElement>(null);
+  const hudStatusTextRef = useRef<HTMLSpanElement>(null);
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
@@ -409,6 +418,48 @@ export function Home() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  const handleInitiateScan = () => {
+    if (!scanningOverlayRef.current || !scanningTextRef.current || !hudStatusDotRef.current || !hudStatusTextRef.current) return;
+    
+    const overlay = scanningOverlayRef.current;
+    const txt = scanningTextRef.current;
+    const dot = hudStatusDotRef.current;
+    const statTxt = hudStatusTextRef.current;
+
+    overlay.style.display = 'block';
+    overlay.style.animation = 'laser-sweep 2.5s ease-in-out forwards';
+    
+    statTxt.innerText = 'SCANNING...';
+    statTxt.className = 'text-amber-400 animate-pulse';
+    dot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-ping';
+    
+    let stage = 0;
+    const interval = setInterval(() => {
+      if (!txt) return;
+      if (stage === 0) {
+        txt.innerText = 'PINGING_CORE...';
+      } else if (stage === 1) {
+        txt.innerText = 'RESOLVING_3D_MESH...';
+      } else if (stage === 2) {
+        txt.innerText = 'CALIBRATION_COMPLETED.';
+      } else {
+        clearInterval(interval);
+      }
+      stage++;
+    }, 600);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      overlay.style.animation = '';
+      overlay.style.display = 'none';
+      txt.innerText = 'SYSTEM_IDLE';
+      
+      statTxt.innerText = 'ONLINE';
+      statTxt.className = 'text-emerald-400';
+      dot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+    }, 2500);
+  };
 
   // Look-at updates for Spline 3D elements and DOM parallax (no-render state)
   useEffect(() => {
@@ -447,6 +498,14 @@ export function Home() {
             splineAppRef.current.emitEvent('mouseHover', 'Robot');
           } catch (_) { /* graceful */ }
         }
+
+        // Direct DOM mutation of HUD coordinates (zero re-renders)
+        if (hudXCoordRef.current) {
+          hudXCoordRef.current.innerText = mouseNorm.current.x.toFixed(3);
+        }
+        if (hudYCoordRef.current) {
+          hudYCoordRef.current.innerText = mouseNorm.current.y.toFixed(3);
+        }
       });
     };
     window.addEventListener('mousemove', handleMouseMove);
@@ -459,8 +518,17 @@ export function Home() {
   // Idle float + head bob loop via Spline variables
   useEffect(() => {
     let t = 0;
+    let frameCount = 0;
     const tick = () => {
       t += 0.012;
+      frameCount++;
+
+      // Telemetry fluctuation of FPS in HUD (zero re-renders)
+      if (frameCount % 12 === 0 && hudFpsRef.current) {
+        const simulatedFps = (59.6 + Math.random() * 0.7).toFixed(1);
+        hudFpsRef.current.innerText = simulatedFps;
+      }
+
       if (splineAppRef.current) {
         try {
           const obj = splineAppRef.current.findObjectByName('Robot');
@@ -712,8 +780,66 @@ export function Home() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="lg:col-span-6 h-[320px] sm:h-[500px] lg:h-[650px] w-full relative flex items-center justify-center overflow-hidden"
+              className="lg:col-span-6 h-[320px] sm:h-[500px] lg:h-[650px] w-full relative flex items-center justify-center overflow-hidden border border-sohub-dark-grey bg-sohub-black/20"
             >
+              {/* HUD Frame Brackets */}
+              <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-sohub-grey/40 pointer-events-none z-30" />
+              <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-sohub-grey/40 pointer-events-none z-30" />
+              <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-sohub-grey/40 pointer-events-none z-30" />
+              <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-sohub-grey/40 pointer-events-none z-30" />
+
+              {/* HUD Header Bar */}
+              <div className="absolute top-4 left-4 right-4 flex justify-between items-start font-mono text-[9px] text-sohub-grey pointer-events-none z-30 select-none">
+                {/* System Status Indicators */}
+                <div className="flex items-center gap-2">
+                  <div ref={hudStatusDotRef} className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="font-bold tracking-widest text-sohub-white">SYS_TETHER // </span>
+                  <span ref={hudStatusTextRef} className="text-emerald-400">ONLINE</span>
+                </div>
+                {/* Mouse Tracking Coordinates */}
+                <div className="text-right flex flex-col gap-0.5">
+                  <span className="font-bold text-sohub-white tracking-widest">LOC_COORD //</span>
+                  <span>X: <span ref={hudXCoordRef} className="text-sohub-white font-bold">0.000</span></span>
+                  <span>Y: <span ref={hudYCoordRef} className="text-sohub-white font-bold">0.000</span></span>
+                </div>
+              </div>
+
+              {/* HUD Targeting Reticle (Center Sourced) */}
+              <div className="absolute w-12 h-12 border border-dashed border-sohub-grey/20 rounded-full pointer-events-none z-20 flex items-center justify-center">
+                <div className="w-1.5 h-1.5 bg-sohub-white/20 rounded-full" />
+              </div>
+
+              {/* Laser Scanner Sweep Line */}
+              <div 
+                ref={scanningOverlayRef}
+                className="absolute left-0 right-0 w-full bg-gradient-to-b from-[#34A853]/40 to-transparent pointer-events-none z-35" 
+                style={{ height: '3px', top: '0px', boxShadow: '0 0 10px rgba(52, 168, 83, 0.8)', display: 'none' }}
+              />
+
+              {/* HUD Footer Diagnostics */}
+              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end font-mono text-[9px] text-sohub-grey pointer-events-none z-30 select-none">
+                <div className="flex flex-col gap-0.5">
+                  <span className="font-bold text-sohub-white tracking-widest">TICK_RATE //</span>
+                  <span>FPS: <span ref={hudFpsRef} className="text-sohub-white font-bold">60.0</span></span>
+                  <span>TERM: <span ref={scanningTextRef} className="text-amber-400 font-bold">SYSTEM_IDLE</span></span>
+                </div>
+                <div className="text-right flex flex-col gap-0.5">
+                  <span className="font-bold text-sohub-white tracking-widest">MODEL_ID //</span>
+                  <span>NODE_ROBOT_3D</span>
+                  <span>SCALE_SENS: 100%</span>
+                </div>
+              </div>
+
+              {/* Interactive Scan Action Overlay */}
+              <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-35 flex flex-col items-center gap-2">
+                <button
+                  onClick={handleInitiateScan}
+                  className="px-4 py-1.5 border border-sohub-grey/30 bg-sohub-black/80 hover:bg-sohub-white hover:text-sohub-black hover:border-sohub-white text-[9px] font-mono uppercase tracking-widest text-sohub-white transition-all cursor-pointer select-none"
+                >
+                  [ INITIATE SCAN ]
+                </button>
+              </div>
+
               {!isMobile ? (
                 /* CSS 3D perspective wrapper for mouse-tilt parallax */
                 <div
@@ -767,7 +893,7 @@ export function Home() {
 
               {/* Hint label */}
               {!isMobile && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[9px] font-mono text-sohub-grey/50 uppercase tracking-widest select-none pointer-events-none">
+                <div className="absolute bottom-11 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[8px] font-mono text-sohub-grey/50 uppercase tracking-widest select-none pointer-events-none z-30">
                   <span className="w-1.5 h-1.5 rounded-full bg-sohub-grey/40 animate-ping" />
                   Click or move cursor to interact
                 </div>
