@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PageTransition } from '../components/PageTransition';
-import { Mail, Github, Linkedin, Instagram, ArrowRight } from 'lucide-react';
+import { Mail, Github, Linkedin, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 
 export function Contact() {
@@ -66,12 +66,6 @@ export function Contact() {
       label: 'Email',
       url: 'mailto:unmeshjoshi083@gmail.com',
       handle: 'unmeshjoshi083@gmail.com',
-    },
-    {
-      icon: Instagram,
-      label: 'Instagram',
-      url: 'https://www.instagram.com/unmesh12634',
-      handle: '@unmesh12634',
     },
   ];
 

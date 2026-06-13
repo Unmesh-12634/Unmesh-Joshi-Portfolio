@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import {
   Github,
   Linkedin,
-  Instagram,
   Mail,
   MapPin,
   Clock,
@@ -72,24 +71,17 @@ const NAV_SECTIONS = [
 const SOCIALS = [
   {
     label: 'GitHub',
-    href: 'https://github.com/unmeshjoshi',
+    href: 'https://github.com/Unmesh-12634',
     icon: Github,
     color: ACCENT.sky,
     hoverBg: 'rgba(56,189,248,0.12)',
   },
   {
     label: 'LinkedIn',
-    href: 'https://linkedin.com',
+    href: 'https://www.linkedin.com/in/unmesh-joshi-b0846431b',
     icon: Linkedin,
     color: ACCENT.violet,
     hoverBg: 'rgba(167,139,250,0.12)',
-  },
-  {
-    label: 'Instagram',
-    href: 'https://instagram.com',
-    icon: Instagram,
-    color: ACCENT.rose,
-    hoverBg: 'rgba(251,113,133,0.12)',
   },
 ];
 
