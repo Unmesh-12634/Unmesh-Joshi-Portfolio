@@ -4,18 +4,26 @@ export function BackgroundScene() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let animationFrameId: number;
     // Add mouse move listener to slightly shift a soft glow highlight in the background
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       const x = (e.clientX / window.innerWidth) * 100;
       const y = (e.clientY / window.innerHeight) * 100;
-      containerRef.current.style.setProperty('--mouse-x', `${x}%`);
-      containerRef.current.style.setProperty('--mouse-y', `${y}%`);
+      
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(() => {
+        if (containerRef.current) {
+          containerRef.current.style.setProperty('--mouse-x', `${x}%`);
+          containerRef.current.style.setProperty('--mouse-y', `${y}%`);
+        }
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 

@@ -412,37 +412,48 @@ export function Home() {
 
   // Look-at updates for Spline 3D elements and DOM parallax (no-render state)
   useEffect(() => {
+    let animationFrameId: number;
+
     const handleMouseMove = (e: MouseEvent) => {
-      // Normalized -1 to 1 for Spline interactions
-      mouseNorm.current = {
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: -((e.clientY / window.innerHeight) * 2 - 1),
-      };
+      const clientX = e.clientX;
+      const clientY = e.clientY;
 
-      // Direct DOM mutation for dynamic parallax background shift (no re-renders)
-      if (containerRef.current) {
-        const x = (e.clientX / window.innerWidth - 0.5) * 12;
-        const y = (e.clientY / window.innerHeight - 0.5) * 12;
-        containerRef.current.style.setProperty('--mouse-x', `${x}px`);
-        containerRef.current.style.setProperty('--mouse-y', `${y}px`);
-      }
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(() => {
+        // Normalized -1 to 1 for Spline interactions
+        mouseNorm.current = {
+          x: (clientX / window.innerWidth) * 2 - 1,
+          y: -((clientY / window.innerHeight) * 2 - 1),
+        };
 
-      // Direct DOM mutation for 3D robot tilt (no re-renders)
-      if (robotInnerRef.current) {
-        const tiltX = ((e.clientY / window.innerHeight) - 0.5) * -14;
-        const tiltY = ((e.clientX / window.innerWidth) - 0.5) * 14;
-        robotInnerRef.current.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-      }
+        // Direct DOM mutation for dynamic parallax background shift (no re-renders)
+        if (containerRef.current) {
+          const x = (clientX / window.innerWidth - 0.5) * 12;
+          const y = (clientY / window.innerHeight - 0.5) * 12;
+          containerRef.current.style.setProperty('--mouse-x', `${x}px`);
+          containerRef.current.style.setProperty('--mouse-y', `${y}px`);
+        }
 
-      // Emit mouseHover on the robot to wake Spline interaction states
-      if (splineAppRef.current) {
-        try {
-          splineAppRef.current.emitEvent('mouseHover', 'Robot');
-        } catch (_) { /* graceful */ }
-      }
+        // Direct DOM mutation for 3D robot tilt (no re-renders)
+        if (robotInnerRef.current) {
+          const tiltX = ((clientY / window.innerHeight) - 0.5) * -14;
+          const tiltY = ((clientX / window.innerWidth) - 0.5) * 14;
+          robotInnerRef.current.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        }
+
+        // Emit mouseHover on the robot to wake Spline interaction states
+        if (splineAppRef.current) {
+          try {
+            splineAppRef.current.emitEvent('mouseHover', 'Robot');
+          } catch (_) { /* graceful */ }
+        }
+      });
     };
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   // Idle float + head bob loop via Spline variables

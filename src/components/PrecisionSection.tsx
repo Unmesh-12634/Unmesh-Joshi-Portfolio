@@ -23,6 +23,8 @@ export function PrecisionSection() {
     gap: 'clamp(32px, 4vw, 56px)',
     position: 'relative',
     overflow: 'hidden',
+    contentVisibility: 'auto',
+    containIntrinsicSize: '0 800px',
   };
 
   const pillarsContainerStyle: React.CSSProperties = {
