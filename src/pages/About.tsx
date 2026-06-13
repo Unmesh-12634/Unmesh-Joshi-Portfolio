@@ -186,6 +186,29 @@ export function About() {
                 </div>
               </TiltCard>
 
+              {/* Google Skills Profile Link Button */}
+              <a
+                href="https://www.skills.google/public_profiles/b0a2a4d6-42e7-4e6f-9c78-2e729195cee6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-between border border-sohub-dark-grey bg-sohub-dark-grey/15 p-5 hover:border-sohub-white/20 transition-all group cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex font-extrabold text-xs tracking-tighter">
+                    <span className="text-[#4285F4]">G</span>
+                    <span className="text-[#EA4335]">o</span>
+                    <span className="text-[#FBBC05]">o</span>
+                    <span className="text-[#4285F4]">g</span>
+                    <span className="text-[#34A853]">l</span>
+                    <span className="text-[#EA4335]">e</span>
+                  </div>
+                  <span className="text-[10px] uppercase tracking-widest font-bold text-sohub-white font-mono">
+                    Developer Skills Profile
+                  </span>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-sohub-grey group-hover:text-sohub-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              </a>
+
               {/* Vision Statement Box */}
               <TiltCard className="border border-sohub-dark-grey bg-sohub-dark-grey/15 p-8 hover:border-sohub-white/20 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-r from-sohub-white/2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
