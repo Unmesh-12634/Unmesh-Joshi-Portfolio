@@ -5,15 +5,15 @@ import FocusTrap from 'focus-trap-react';
 import { Home, User, Cpu, FolderKanban, Award, Trophy, Briefcase, Compass, Mail } from 'lucide-react';
 
 const navLinks = [
-  { path: '/', label: 'Home', icon: <Home className="w-4 h-4" /> },
-  { path: '/about', label: 'About', icon: <User className="w-4 h-4" /> },
-  { path: '/skills', label: 'Skills', icon: <Cpu className="w-4 h-4" /> },
-  { path: '/projects', label: 'Projects', icon: <FolderKanban className="w-4 h-4" /> },
-  { path: '/certificates', label: 'Certificates', icon: <Award className="w-4 h-4" /> },
-  { path: '/hackathons', label: 'Hackathons', icon: <Trophy className="w-4 h-4" /> },
-  { path: '/experience', label: 'Experience', icon: <Briefcase className="w-4 h-4" /> },
-  { path: '/journey', label: 'Journey', icon: <Compass className="w-4 h-4" /> },
-  { path: '/contact', label: 'Contact', icon: <Mail className="w-4 h-4" /> },
+  { path: '/', label: 'Home', icon: <Home className="w-5 h-5" /> },
+  { path: '/about', label: 'About', icon: <User className="w-5 h-5" /> },
+  { path: '/skills', label: 'Skills', icon: <Cpu className="w-5 h-5" /> },
+  { path: '/projects', label: 'Projects', icon: <FolderKanban className="w-5 h-5" /> },
+  { path: '/certificates', label: 'Certificates', icon: <Award className="w-5 h-5" /> },
+  { path: '/hackathons', label: 'Hackathons', icon: <Trophy className="w-5 h-5" /> },
+  { path: '/experience', label: 'Experience', icon: <Briefcase className="w-5 h-5" /> },
+  { path: '/journey', label: 'Journey', icon: <Compass className="w-5 h-5" /> },
+  { path: '/contact', label: 'Contact', icon: <Mail className="w-5 h-5" /> },
 ];
 
 const mobileMenuVariants: Variants = {
@@ -75,11 +75,19 @@ export function MobileMenu({ isOpen, closeMenu }: { isOpen: boolean; closeMenu: 
     const timer = setTimeout(() => {
       const limelight = limelightRef.current;
       const activeItem = itemRefs.current[activeIndex];
+      const navContainer = activeItem?.closest('nav');
       
-      if (limelight && activeItem) {
-        const top = activeItem.offsetTop;
+      if (limelight && activeItem && navContainer) {
+        // Recursively compute offset relative to the nav container to bypass transform offsetParent issues
+        let offsetTop = 0;
+        let current: HTMLElement | null = activeItem;
+        while (current && current !== navContainer) {
+          offsetTop += current.offsetTop;
+          current = current.offsetParent as HTMLElement | null;
+        }
+
         const height = activeItem.offsetHeight;
-        limelight.style.top = `${top}px`;
+        limelight.style.top = `${offsetTop}px`;
         limelight.style.height = `${height}px`;
         limelight.style.opacity = '1';
         setIsReady(true);
@@ -110,7 +118,7 @@ export function MobileMenu({ isOpen, closeMenu }: { isOpen: boolean; closeMenu: 
               initial="closed"
               animate="open"
               exit="closed"
-              className="fixed top-0 bottom-0 right-0 w-[calc(100vw-2rem)] max-w-[280px] bg-sohub-black border-l border-sohub-dark-grey z-50 p-6 pt-24 flex flex-col justify-between overflow-hidden"
+              className="fixed top-0 bottom-0 right-0 w-[calc(100vw-2rem)] max-w-[290px] bg-sohub-black border-l border-sohub-dark-grey z-50 p-6 pt-24 flex flex-col justify-between overflow-hidden"
             >
               {/* Backlight Ambient Glow Effect */}
               <div className="absolute top-1/4 -right-12 w-48 h-48 rounded-full bg-sohub-white/5 blur-[60px] pointer-events-none z-0" />
@@ -127,21 +135,21 @@ export function MobileMenu({ isOpen, closeMenu }: { isOpen: boolean; closeMenu: 
                   </span>
                 </div>
 
-                <nav className="relative flex flex-col gap-3 w-full pl-4 border-l border-sohub-dark-grey/40">
+                <nav className="relative flex flex-col gap-4 w-full pl-5 border-l border-sohub-dark-grey/40">
                   
                   {/* Vertical Limelight Side Light Indicator */}
                   <div
                     ref={limelightRef}
-                    className={`absolute left-[-1.5px] z-10 w-[2.5px] rounded-full bg-primary shadow-[0_0_8px_var(--primary)] pointer-events-none opacity-0 ${
-                      isReady ? 'transition-[top,height,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]' : ''
+                    className={`absolute left-[-1.5px] z-10 w-[2.5px] rounded-full bg-primary shadow-[0_0_8px_var(--primary),0_0_15px_var(--primary)] pointer-events-none opacity-0 ${
+                      isReady ? 'transition-[top,height,opacity] duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]' : ''
                     }`}
                     style={{ top: '0px', height: '0px' }}
                   >
-                    {/* Spotlight glow cone projecting rightwards */}
-                    <div className="absolute left-[2.5px] top-[10%] bottom-[10%] w-[120px] [clip-path:polygon(0_15%,100%_35%,100%_65%,0_85%)] bg-gradient-to-r from-primary/12 to-transparent pointer-events-none" />
+                    {/* Spotlight smooth glow projecting rightwards */}
+                    <div className="absolute left-[2.5px] top-1/2 -translate-y-1/2 w-[180px] h-[55px] bg-gradient-to-r from-primary/18 via-primary/3 to-transparent blur-md pointer-events-none" />
                     
-                    {/* Distant light target pool */}
-                    <div className="absolute left-[90px] top-[25%] bottom-[25%] w-[1.5px] rounded-full bg-primary/25 pointer-events-none" />
+                    {/* Extra radial core glow */}
+                    <div className="absolute left-[2.5px] top-1/2 -translate-y-1/2 w-[80px] h-[35px] bg-primary/15 rounded-full blur-sm pointer-events-none" />
                   </div>
 
                   {navLinks.map((link, index) => {
@@ -152,18 +160,18 @@ export function MobileMenu({ isOpen, closeMenu }: { isOpen: boolean; closeMenu: 
                           to={link.path}
                           onClick={closeMenu}
                           ref={(el) => { itemRefs.current[index] = el; }}
-                          className={`text-base font-bold uppercase tracking-wider block transition-colors w-full text-left py-2 flex items-center gap-3.5 ${
+                          className={`text-base font-bold uppercase tracking-wider block transition-colors w-full text-left py-2 flex items-center gap-4 ${
                             isActive ? 'text-sohub-white' : 'text-sohub-grey hover:text-sohub-white'
                           }`}
                         >
-                          <span className={`w-4 h-4 transition-all duration-300 flex items-center justify-center ${
+                          <span className={`w-5 h-5 transition-all duration-300 flex items-center justify-center ${
                             isActive 
                               ? 'text-sohub-white scale-110 opacity-100' 
                               : 'text-sohub-grey opacity-45'
                           }`}>
                             {link.icon}
                           </span>
-                          <span className="font-display tracking-widest text-[11px] uppercase">
+                          <span className="font-display tracking-[0.16em] text-sm uppercase font-bold">
                             {link.label}
                           </span>
                         </Link>
