@@ -1,24 +1,25 @@
+import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, Variants } from 'motion/react';
-import { useEffect } from 'react';
 import FocusTrap from 'focus-trap-react';
+import { Home, User, Cpu, FolderKanban, Award, Trophy, Briefcase, Compass, Mail } from 'lucide-react';
 
 const navLinks = [
-  { path: '/', label: 'Home' },
-  { path: '/about', label: 'About' },
-  { path: '/skills', label: 'Skills' },
-  { path: '/projects', label: 'Projects' },
-  { path: '/certificates', label: 'Certificates' },
-  { path: '/hackathons', label: 'Hackathons' },
-  { path: '/experience', label: 'Experience' },
-  { path: '/journey', label: 'Journey' },
-  { path: '/contact', label: 'Contact' },
+  { path: '/', label: 'Home', icon: <Home className="w-4 h-4" /> },
+  { path: '/about', label: 'About', icon: <User className="w-4 h-4" /> },
+  { path: '/skills', label: 'Skills', icon: <Cpu className="w-4 h-4" /> },
+  { path: '/projects', label: 'Projects', icon: <FolderKanban className="w-4 h-4" /> },
+  { path: '/certificates', label: 'Certificates', icon: <Award className="w-4 h-4" /> },
+  { path: '/hackathons', label: 'Hackathons', icon: <Trophy className="w-4 h-4" /> },
+  { path: '/experience', label: 'Experience', icon: <Briefcase className="w-4 h-4" /> },
+  { path: '/journey', label: 'Journey', icon: <Compass className="w-4 h-4" /> },
+  { path: '/contact', label: 'Contact', icon: <Mail className="w-4 h-4" /> },
 ];
 
 const mobileMenuVariants: Variants = {
   open: {
     x: 0,
-    transition: { type: 'spring', stiffness: 150, damping: 25, staggerChildren: 0.05, delayChildren: 0.1 },
+    transition: { type: 'spring', stiffness: 150, damping: 25, staggerChildren: 0.04, delayChildren: 0.15 },
   },
   closed: {
     x: '100%',
@@ -48,52 +49,133 @@ function useEscapeClose(open: boolean, onClose: () => void) {
 
 export function MobileMenu({ isOpen, closeMenu }: { isOpen: boolean; closeMenu: () => void; }) {
   const location = useLocation();
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const limelightRef = useRef<HTMLDivElement | null>(null);
+  
+  const [activeIndex, setActiveIndex] = useState(() => 
+    navLinks.findIndex(link => link.path === location.pathname)
+  );
+  const [isReady, setIsReady] = useState(false);
 
   useEscapeClose(isOpen, closeMenu);
+
+  useEffect(() => {
+    const idx = navLinks.findIndex(link => link.path === location.pathname);
+    if (idx !== -1) {
+      setActiveIndex(idx);
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isOpen || activeIndex === -1) {
+      setIsReady(false);
+      return;
+    }
+    
+    const timer = setTimeout(() => {
+      const limelight = limelightRef.current;
+      const activeItem = itemRefs.current[activeIndex];
+      
+      if (limelight && activeItem) {
+        const top = activeItem.offsetTop;
+        const height = activeItem.offsetHeight;
+        limelight.style.top = `${top}px`;
+        limelight.style.height = `${height}px`;
+        limelight.style.opacity = '1';
+        setIsReady(true);
+      }
+    }, 180);
+
+    return () => clearTimeout(timer);
+  }, [isOpen, activeIndex]);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <FocusTrap active={isOpen}>
           <div>
+            {/* Backdrop overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 bg-black/85 backdrop-blur-sm z-50"
               onClick={closeMenu}
             />
+            
+            {/* Sliding Mobile Sidebar */}
             <motion.div
               variants={mobileMenuVariants}
               initial="closed"
               animate="open"
               exit="closed"
-              className="fixed top-0 bottom-0 right-0 w-[calc(100vw-1.5rem)] max-w-xs bg-sohub-black border-l border-sohub-dark-grey z-50 p-8 flex flex-col justify-between"
+              className="fixed top-0 bottom-0 right-0 w-[calc(100vw-2rem)] max-w-[280px] bg-sohub-black border-l border-sohub-dark-grey z-50 p-6 pt-24 flex flex-col justify-between overflow-hidden"
             >
-              <div className="flex-1 flex flex-col justify-center items-start">
-                <nav className="flex flex-col gap-6 w-full">
-                  {navLinks.map((link) => (
-                    <motion.div key={link.path} variants={mobileLinkVariants}>
-                      <Link
-                        to={link.path}
-                        onClick={closeMenu}
-                        className={`text-2xl font-semibold uppercase tracking-wider block transition-colors w-full text-left py-2 ${
-                          location.pathname === link.path
-                            ? 'text-sohub-white border-l-2 border-sohub-white pl-3'
-                            : 'text-sohub-grey hover:text-sohub-white pl-0'
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ))}
+              {/* Backlight Ambient Glow Effect */}
+              <div className="absolute top-1/4 -right-12 w-48 h-48 rounded-full bg-sohub-white/5 blur-[60px] pointer-events-none z-0" />
+              <div className="absolute bottom-1/4 -left-12 w-40 h-40 rounded-full bg-sohub-white/3 blur-[50px] pointer-events-none z-0" />
+
+              {/* Side edge border-glow (visual side light) */}
+              <div className="absolute top-0 bottom-0 left-0 w-[1px] bg-gradient-to-b from-transparent via-primary/30 to-transparent pointer-events-none z-10" />
+
+              <div className="flex-1 flex flex-col justify-start items-start relative z-10 w-full">
+                {/* Menu Header Title */}
+                <div className="w-full mb-8 pb-3 border-b border-sohub-dark-grey/50">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-sohub-grey font-bold">
+                    Navigation Menu
+                  </span>
+                </div>
+
+                <nav className="relative flex flex-col gap-3 w-full pl-4 border-l border-sohub-dark-grey/40">
+                  
+                  {/* Vertical Limelight Side Light Indicator */}
+                  <div
+                    ref={limelightRef}
+                    className={`absolute left-[-1.5px] z-10 w-[2.5px] rounded-full bg-primary shadow-[0_0_8px_var(--primary)] pointer-events-none opacity-0 ${
+                      isReady ? 'transition-[top,height,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]' : ''
+                    }`}
+                    style={{ top: '0px', height: '0px' }}
+                  >
+                    {/* Spotlight glow cone projecting rightwards */}
+                    <div className="absolute left-[2.5px] top-[10%] bottom-[10%] w-[120px] [clip-path:polygon(0_15%,100%_35%,100%_65%,0_85%)] bg-gradient-to-r from-primary/12 to-transparent pointer-events-none" />
+                    
+                    {/* Distant light target pool */}
+                    <div className="absolute left-[90px] top-[25%] bottom-[25%] w-[1.5px] rounded-full bg-primary/25 pointer-events-none" />
+                  </div>
+
+                  {navLinks.map((link, index) => {
+                    const isActive = location.pathname === link.path;
+                    return (
+                      <motion.div key={link.path} variants={mobileLinkVariants} className="w-full">
+                        <Link
+                          to={link.path}
+                          onClick={closeMenu}
+                          ref={(el) => { itemRefs.current[index] = el; }}
+                          className={`text-base font-bold uppercase tracking-wider block transition-colors w-full text-left py-2 flex items-center gap-3.5 ${
+                            isActive ? 'text-sohub-white' : 'text-sohub-grey hover:text-sohub-white'
+                          }`}
+                        >
+                          <span className={`w-4 h-4 transition-all duration-300 flex items-center justify-center ${
+                            isActive 
+                              ? 'text-sohub-white scale-110 opacity-100' 
+                              : 'text-sohub-grey opacity-45'
+                          }`}>
+                            {link.icon}
+                          </span>
+                          <span className="font-display tracking-widest text-[11px] uppercase">
+                            {link.label}
+                          </span>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                 </nav>
               </div>
 
-              {/* Extra details in side menu like local time */}
-              <div className="text-xxs uppercase tracking-widest text-sohub-grey mt-6 pt-4 border-t border-sohub-dark-grey">
-                &copy; 2026 Unmesh Joshi. All rights reserved.
+              {/* Extra details in side menu like copyright */}
+              <div className="text-[9px] font-mono tracking-widest text-sohub-grey uppercase mt-6 pt-4 border-t border-sohub-dark-grey/50 relative z-10">
+                &copy; 2026 Unmesh Joshi.
               </div>
             </motion.div>
           </div>

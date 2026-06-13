@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PageTransition } from '../components/PageTransition';
-import { Target, BookOpen, Globe, ArrowUpRight } from 'lucide-react';
+import { Target, BookOpen, Globe, ArrowUpRight, Github, Linkedin } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 
@@ -186,28 +186,63 @@ export function About() {
                 </div>
               </TiltCard>
 
-              {/* Google Skills Profile Link Button */}
-              <a
-                href="https://www.skills.google/public_profiles/b0a2a4d6-42e7-4e6f-9c78-2e729195cee6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-between border border-sohub-dark-grey bg-sohub-dark-grey/15 p-5 hover:border-sohub-white/20 transition-all group cursor-pointer"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex font-extrabold text-xs tracking-tighter">
-                    <span className="text-[#4285F4]">G</span>
-                    <span className="text-[#EA4335]">o</span>
-                    <span className="text-[#FBBC05]">o</span>
-                    <span className="text-[#4285F4]">g</span>
-                    <span className="text-[#34A853]">l</span>
-                    <span className="text-[#EA4335]">e</span>
+              {/* Profile Links Stack */}
+              <div className="flex flex-col gap-3 w-full">
+                {/* LinkedIn Profile Link */}
+                <a
+                  href="https://www.linkedin.com/in/unmesh-joshi-b0846431b"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-between border border-sohub-dark-grey bg-sohub-dark-grey/15 p-5 hover:border-sohub-white/20 transition-all group cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <Linkedin className="w-4 h-4 text-sohub-white" />
+                    <span className="text-[10px] uppercase tracking-widest font-bold text-sohub-white font-mono">
+                      LinkedIn Profile
+                    </span>
                   </div>
-                  <span className="text-[10px] uppercase tracking-widest font-bold text-sohub-white font-mono">
-                    Developer Skills Profile
-                  </span>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-sohub-grey group-hover:text-sohub-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-              </a>
+                  <ArrowUpRight className="w-4 h-4 text-sohub-grey group-hover:text-sohub-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </a>
+
+                {/* GitHub Profile Link */}
+                <a
+                  href="https://github.com/Unmesh-12634"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-between border border-sohub-dark-grey bg-sohub-dark-grey/15 p-5 hover:border-sohub-white/20 transition-all group cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <Github className="w-4 h-4 text-sohub-white" />
+                    <span className="text-[10px] uppercase tracking-widest font-bold text-sohub-white font-mono">
+                      GitHub Profile
+                    </span>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-sohub-grey group-hover:text-sohub-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </a>
+
+                {/* Google Skills Profile Link Button */}
+                <a
+                  href="https://www.skills.google/public_profiles/b0a2a4d6-42e7-4e6f-9c78-2e729195cee6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-between border border-sohub-dark-grey bg-sohub-dark-grey/15 p-5 hover:border-sohub-white/20 transition-all group cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex font-extrabold text-xs tracking-tighter">
+                      <span className="text-[#4285F4]">G</span>
+                      <span className="text-[#EA4335]">o</span>
+                      <span className="text-[#FBBC05]">o</span>
+                      <span className="text-[#4285F4]">g</span>
+                      <span className="text-[#34A853]">l</span>
+                      <span className="text-[#EA4335]">e</span>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-widest font-bold text-sohub-white font-mono">
+                      Developer Skills Profile
+                    </span>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-sohub-grey group-hover:text-sohub-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </a>
+              </div>
 
               {/* Vision Statement Box */}
               <TiltCard className="border border-sohub-dark-grey bg-sohub-dark-grey/15 p-8 hover:border-sohub-white/20 relative overflow-hidden group">
