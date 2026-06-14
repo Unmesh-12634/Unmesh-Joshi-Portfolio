@@ -840,64 +840,42 @@ export function Home() {
                 </button>
               </div>
 
-              {!isMobile ? (
-                /* CSS 3D perspective wrapper for mouse-tilt parallax */
+              {/* CSS 3D perspective wrapper for mouse-tilt parallax */}
+              <div
+                ref={robotContainerRef}
+                onClick={handleRobotClick}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  perspective: '900px',
+                  cursor: 'pointer',
+                  transition: 'transform 0.05s linear',
+                }}
+              >
                 <div
-                  ref={robotContainerRef}
-                  onClick={handleRobotClick}
+                  ref={robotInnerRef}
                   style={{
                     width: '100%',
                     height: '100%',
-                    perspective: '900px',
-                    cursor: 'pointer',
-                    transition: 'transform 0.05s linear',
+                    transform: 'rotateX(0deg) rotateY(0deg)',
+                    transformStyle: 'preserve-3d',
+                    transition: 'transform 0.12s ease-out',
+                    willChange: 'transform',
                   }}
                 >
-                  <div
-                    ref={robotInnerRef}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      transform: 'rotateX(0deg) rotateY(0deg)',
-                      transformStyle: 'preserve-3d',
-                      transition: 'transform 0.12s ease-out',
-                      willChange: 'transform',
-                    }}
-                  >
-                    <SplineScene
-                      scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                      className="w-full h-full"
-                      onLoad={onSplineLoad}
-                    />
-                  </div>
+                  <SplineScene
+                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                    className="w-full h-full"
+                    onLoad={onSplineLoad}
+                  />
                 </div>
-              ) : (
-                /* Beautiful, smooth CSS Interactive glowing orb for mobile to prevent lag */
-                <div className="w-full h-full flex items-center justify-center relative">
-                  <div className="absolute w-64 h-64 bg-gradient-to-tr from-[#4285F4]/20 via-[#EA4335]/20 to-[#FBBC05]/20 rounded-full blur-[60px] animate-pulse" />
-                  <div className="relative w-44 h-44 border border-white/10 rounded-full flex items-center justify-center bg-black/40 backdrop-blur-md shadow-[0_0_50px_rgba(255,255,255,0.05)]">
-                    {/* Glowing outer rings */}
-                    <div className="absolute inset-2 border border-[#4285F4]/30 rounded-full animate-[spin_8s_linear_infinite]" />
-                    <div className="absolute inset-4 border border-t-[#EA4335]/40 border-b-[#FBBC05]/40 border-l-transparent border-r-transparent rounded-full animate-[spin_4s_linear_infinite_reverse]" />
-                    
-                    {/* Inner core */}
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-white/90 via-sohub-grey to-zinc-900 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.3)] animate-pulse">
-                      <Cpu className="w-7 h-7 text-black animate-pulse" />
-                    </div>
-                  </div>
-                  {/* Decorative particles */}
-                  <div className="absolute w-2 h-2 bg-[#34A853] rounded-full blur-[1px] top-1/4 left-1/4 animate-bounce" />
-                  <div className="absolute w-1.5 h-1.5 bg-[#4285F4] rounded-full blur-[1px] bottom-1/3 right-1/4 animate-ping" />
-                </div>
-              )}
+              </div>
 
               {/* Hint label */}
-              {!isMobile && (
-                <div className="absolute bottom-11 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[8px] font-mono text-sohub-grey/50 uppercase tracking-widest select-none pointer-events-none z-30">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sohub-grey/40 animate-ping" />
-                  Click or move cursor to interact
-                </div>
-              )}
+              <div className="absolute bottom-11 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-[8px] font-mono text-sohub-grey/50 uppercase tracking-widest select-none pointer-events-none z-30">
+                <span className="w-1.5 h-1.5 rounded-full bg-sohub-grey/40 animate-ping" />
+                {isMobile ? 'Tap or drag to interact' : 'Click or move cursor to interact'}
+              </div>
             </motion.div>
           </div>
         </section>
