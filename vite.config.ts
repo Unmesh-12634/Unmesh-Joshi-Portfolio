@@ -22,9 +22,6 @@ import { defineConfig } from 'vite';
               if (id.includes('three') || id.includes('@react-three')) {
                 return 'three-vendor';
               }
-              if (id.includes('@splinetool')) {
-                return 'spline-vendor';
-              }
               if (id.includes('framer-motion') || id.includes('motion')) {
                 return 'motion-vendor';
               }
