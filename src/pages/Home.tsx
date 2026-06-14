@@ -584,12 +584,76 @@ export function Home() {
     return () => cancelAnimationFrame(animFrameRef.current);
   }, []);
 
+  // Pause/Play Spline rendering based on viewport visibility to save GPU/CPU cycles
+  useEffect(() => {
+    if (!robotContainerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (splineAppRef.current) {
+          if (entry.isIntersecting) {
+            try {
+              splineAppRef.current.play();
+            } catch (_) {}
+          } else {
+            try {
+              splineAppRef.current.stop();
+            } catch (_) {}
+          }
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(robotContainerRef.current);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   // onLoad: store Spline app ref and fire startup event
   const onSplineLoad = useCallback((app: Application) => {
     splineAppRef.current = app;
     try {
       app.emitEvent('start', 'Robot');
     } catch (_) { /* graceful */ }
+
+    // If container is not currently visible in viewport, stop rendering immediately
+    if (robotContainerRef.current) {
+      const rect = robotContainerRef.current.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!isVisible) {
+        try {
+          app.stop();
+        } catch (_) {}
+        return;
+      }
+    }
+
+    // On mobile viewports, pause the rendering loop 500ms after initial frame draw
+    if (window.innerWidth < 1024) {
+      setTimeout(() => {
+        try {
+          app.stop();
+        } catch (_) {}
+      }, 500);
+    }
+  }, []);
+
+  const handleInteractionStart = useCallback(() => {
+    if (!splineAppRef.current) return;
+    try {
+      splineAppRef.current.play();
+    } catch (_) {}
+  }, []);
+
+  const handleInteractionEnd = useCallback(() => {
+    // Only pause on mobile viewports to reclaim GPU resources
+    if (window.innerWidth < 1024 && splineAppRef.current) {
+      try {
+        splineAppRef.current.stop();
+      } catch (_) {}
+    }
   }, []);
 
   // Click on robot: trigger mouseDown/mouseUp interaction
@@ -863,6 +927,11 @@ export function Home() {
               <div
                 ref={robotContainerRef}
                 onClick={handleRobotClick}
+                onMouseDown={handleInteractionStart}
+                onMouseUp={handleInteractionEnd}
+                onMouseLeave={handleInteractionEnd}
+                onTouchStart={handleInteractionStart}
+                onTouchEnd={handleInteractionEnd}
                 style={{
                   width: '100%',
                   height: '100%',
@@ -911,7 +980,7 @@ export function Home() {
                     }
                   >
                     <SplineScene
-                      scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                      scene="/scene.splinecode"
                       className="w-full h-full"
                       onLoad={onSplineLoad}
                     />
