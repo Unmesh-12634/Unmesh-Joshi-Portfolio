@@ -317,7 +317,7 @@ export function PrecisionSection() {
 
           {/* Soft filled background area under the curve */}
           <path
-            d="M0,100 C360,180 720,20 1080,180 1440,100 L1440,200 L0,200 Z"
+            d="M0,100 C360,180 720,20 1080,180 S 1260,100 1440,100 L1440,200 L0,200 Z"
             fill="var(--sohub-dark-grey)"
             opacity="0.02"
           />
@@ -344,7 +344,7 @@ export function PrecisionSection() {
 
           {/* Thread 3: Main glowing center thread */}
           <path
-            d="M -20,100 C 360,180 720,20 1080,180 1460,100"
+            d="M -20,100 C 360,180 720,20 1080,180 S 1260,100 1460,100"
             fill="none"
             stroke="url(#neon-curve-grad)"
             strokeWidth="2.0"
@@ -408,7 +408,7 @@ export function PrecisionSection() {
 
           {/* Thread 10: Drooping bottom thread (deep dive) */}
           <path
-            d="M -20,115 C 360,195 720,35 1080,195 1460,230"
+            d="M -20,115 C 360,195 720,35 1080,195 S 1260,230 1460,230"
             fill="none"
             stroke="url(#neon-curve-grad)"
             strokeWidth="1.0"
