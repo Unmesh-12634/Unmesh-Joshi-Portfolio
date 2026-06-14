@@ -5,6 +5,21 @@ import type { Application } from '@splinetool/runtime'
 
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
+// Cap device pixel ratio on mobile to optimize WebGL shading performance
+if (typeof window !== 'undefined') {
+  const isMobile = window.innerWidth < 1024;
+  if (isMobile && window.devicePixelRatio > 1.2) {
+    try {
+      Object.defineProperty(window, 'devicePixelRatio', {
+        get: () => 1.2,
+        configurable: true
+      });
+    } catch (e) {
+      console.warn("Could not cap devicePixelRatio:", e);
+    }
+  }
+}
+
 interface SplineSceneProps {
   scene: string
   className?: string

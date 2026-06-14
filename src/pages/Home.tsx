@@ -13,12 +13,24 @@ import {
 // Per-card scroll-triggered 3D tilt reveal animation wrapper
 function ProjectCardReveal({ children, idx }: { children: React.ReactNode; idx: number }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start 88%', 'start 22%'],
   });
 
-  const rotateX = useTransform(scrollYProgress, [0, 1], [14, 0]);
+  // Disable heavy 3D rotation on mobile to prevent scroll stuttering
+  const rotateX = useTransform(scrollYProgress, [0, 1], [isMobile ? 0 : 14, 0]);
   const scale   = useTransform(scrollYProgress, [0, 1], [0.96, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
 
@@ -466,6 +478,7 @@ export function Home() {
     let animationFrameId: number;
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (window.innerWidth < 1024) return;
       const clientX = e.clientX;
       const clientY = e.clientY;
 
@@ -527,6 +540,12 @@ export function Home() {
       if (frameCount % 12 === 0 && hudFpsRef.current) {
         const simulatedFps = (59.6 + Math.random() * 0.7).toFixed(1);
         hudFpsRef.current.innerText = simulatedFps;
+      }
+
+      // Bypass Spline object updates on mobile viewports to avoid constant WebGL drawing overhead
+      if (window.innerWidth < 1024) {
+        animFrameRef.current = requestAnimationFrame(tick);
+        return;
       }
 
       if (splineAppRef.current) {

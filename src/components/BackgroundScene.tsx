@@ -7,6 +7,7 @@ export function BackgroundScene() {
     let animationFrameId: number;
     // Add mouse move listener to slightly shift a soft glow highlight in the background
     const handleMouseMove = (e: MouseEvent) => {
+      if (window.innerWidth < 1024) return;
       if (!containerRef.current) return;
       const x = (e.clientX / window.innerWidth) * 100;
       const y = (e.clientY / window.innerHeight) * 100;

@@ -47,6 +47,7 @@ export function Spotlight({
 
   useEffect(() => {
     if (!parentElement) return;
+    if (window.innerWidth < 1024) return;
 
     parentElement.addEventListener('mousemove', handleMouseMove);
     parentElement.addEventListener('mouseenter', () => setIsHovered(true));

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 
 export function CursorEffect() {
+  const [isMobile, setIsMobile] = useState(true);
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [trailPosition, setTrailPosition] = useState({ x: -100, y: -100 });
   const [isHovered, setIsHovered] = useState(false);
@@ -9,6 +10,17 @@ export function CursorEffect() {
   const requestRef = useRef<number | null>(null);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // matches md:hidden break
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsHidden(false);
@@ -35,10 +47,12 @@ export function CursorEffect() {
       document.removeEventListener('mouseleave', handleMouseLeave);
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, []);
+  }, [isMobile]);
 
   // Animate the outer trail ring with a smooth follow-delay (linear interpolation)
   useEffect(() => {
+    if (isMobile) return;
+
     const updateTrail = () => {
       setTrailPosition((prev) => {
         const dx = position.x - prev.x;
@@ -56,9 +70,9 @@ export function CursorEffect() {
     return () => {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [position]);
+  }, [isMobile, position]);
 
-  if (isHidden) return null;
+  if (isMobile || isHidden) return null;
 
   return (
     <>
