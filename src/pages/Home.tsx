@@ -3,7 +3,7 @@ import type { Application } from '@splinetool/runtime';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { PageTransition } from '../components/PageTransition';
-import { SplineScene } from '@/components/ui/splite';
+import { SplineScene, SplineErrorBoundary } from '@/components/ui/splite';
 import { Spotlight } from '@/components/ui/spotlight';
 import { 
   ArrowUpRight, Github, ExternalLink, Cpu, Code, Layers, Users, 
@@ -882,11 +882,40 @@ export function Home() {
                     willChange: 'transform',
                   }}
                 >
-                  <SplineScene
-                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                    className="w-full h-full"
-                    onLoad={onSplineLoad}
-                  />
+                  <SplineErrorBoundary
+                    fallback={
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-sohub-black/40 p-6 relative">
+                        {/* Brackets */}
+                        <div className="absolute top-2 left-2 w-3 h-3 border-t border-l border-red-500/30" />
+                        <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-red-500/30" />
+                        <div className="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-red-500/30" />
+                        <div className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-red-500/30" />
+                        
+                        {/* Hologram Fallback Visual */}
+                        <div className="relative w-36 h-36 mb-6 flex items-center justify-center">
+                          {/* Pulsing ring */}
+                          <div className="absolute inset-0 rounded-full border border-red-500/15 animate-ping opacity-75" />
+                          <div className="absolute inset-4 rounded-full border border-dashed border-red-500/20 animate-spin [animation-duration:15s]" />
+                          <div className="absolute inset-10 rounded-full bg-red-500/5 blur-sm" />
+                          {/* Inner core */}
+                          <div className="w-10 h-10 border border-red-500/40 rounded-full flex items-center justify-center bg-sohub-black z-10 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                            <span className="text-[10px] font-mono text-red-500 font-bold animate-pulse">!</span>
+                          </div>
+                        </div>
+
+                        <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-red-500 mb-1.5 animate-pulse">[ WEBGL_CONTEXT_BLOCKED ]</span>
+                        <p className="text-[9px] uppercase font-mono text-sohub-grey text-center max-w-xs leading-normal">
+                          GPU rendering context was lost or blocked by your browser. Ensure hardware acceleration is enabled or reload the tab.
+                        </p>
+                      </div>
+                    }
+                  >
+                    <SplineScene
+                      scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                      className="w-full h-full"
+                      onLoad={onSplineLoad}
+                    />
+                  </SplineErrorBoundary>
                 </div>
               </div>
 

@@ -1,22 +1,38 @@
 'use client'
 
-import { Suspense, lazy, useCallback } from 'react'
+import React, { Suspense, lazy, Component, ErrorInfo, ReactNode } from 'react'
 import type { Application } from '@splinetool/runtime'
 
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
-// Cap device pixel ratio on mobile to optimize WebGL shading performance
-if (typeof window !== 'undefined') {
-  const isMobile = window.innerWidth < 1024;
-  if (isMobile && window.devicePixelRatio > 1.2) {
-    try {
-      Object.defineProperty(window, 'devicePixelRatio', {
-        get: () => 1.2,
-        configurable: true
-      });
-    } catch (e) {
-      console.warn("Could not cap devicePixelRatio:", e);
+interface ErrorBoundaryProps {
+  children: ReactNode;
+  fallback: ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+export class SplineErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  public state: ErrorBoundaryState = {
+    hasError: false
+  };
+
+  public static getDerivedStateFromError(_: Error): ErrorBoundaryState {
+    return { hasError: true };
+  }
+
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("Spline WebGL Context Error caught by boundary:", error, errorInfo);
+  }
+
+  public render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
     }
+
+    return this.props.children;
   }
 }
 
