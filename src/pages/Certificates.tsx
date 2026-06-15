@@ -25,6 +25,16 @@ export function Certificates() {
 
   const courses: Credential[] = [
     {
+      title: 'National Workshop on "Mobile Device and Application Security"',
+      organizer: 'CUSAT, IIT Jammu & ISEA',
+      description: 'Completed a five-day National Workshop on Mobile Device and Application Security organized by the Department of Computer Applications, Cochin University of Science and Technology (CUSAT), in collaboration with IIT Jammu under the ISEA project. The intensive training program focused on identification of vulnerabilities in mobile operating systems, secure coding patterns for mobile applications, threat landscape mapping, and defensive security measures, supported by the Ministry of Electronics and Information Technology (MeitY).',
+      achievement: 'Certificate of Participation',
+      image: '/Courses/mobile_device_and_application_security_workshop_2026.png',
+      date: 'February 23 - 26, 2026',
+      type: 'course',
+      category: 'other'
+    },
+    {
       title: 'Oracle Cloud Infrastructure 2025 Certified Generative AI Professional',
       organizer: 'Oracle',
       description: 'Global professional certification from Oracle University. Validates comprehensive expertise in Large Language Models (LLMs), prompt engineering, Retrieval-Augmented Generation (RAG), fine-tuning models, and deploying generative AI pipelines on Oracle Cloud Infrastructure.',
