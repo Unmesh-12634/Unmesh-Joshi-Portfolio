@@ -6,6 +6,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BackgroundScene } from './components/BackgroundScene';
 import { Toaster } from './components/ui/sonner';
+import { toast } from 'sonner';
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
@@ -65,6 +66,54 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  useEffect(() => {
+    const handleCopy = (e: ClipboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target instanceof HTMLImageElement ||
+        target.closest('img') ||
+        (target.style.backgroundImage && target.style.backgroundImage !== 'none')
+      ) {
+        e.clipboardData?.setData('text/plain', 'You cannot copy this asset. It belongs to Unmesh Joshi.');
+        e.preventDefault();
+        toast.warning('Action Blocked', {
+          description: 'This asset is protected. It belongs to Unmesh Joshi.',
+        });
+      }
+    };
+
+    const handleContextMenu = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target instanceof HTMLImageElement || target.closest('img')) {
+        e.preventDefault();
+        navigator.clipboard.writeText('You cannot copy this asset. It belongs to Unmesh Joshi.').catch(() => {});
+        toast.warning('Action Blocked', {
+          description: 'Right-click is disabled on images to protect assets.',
+        });
+      }
+    };
+
+    const handleDragStart = (e: DragEvent) => {
+      const target = e.target as HTMLElement;
+      if (target instanceof HTMLImageElement || target.closest('img')) {
+        e.preventDefault();
+        toast.warning('Action Blocked', {
+          description: 'Image dragging is disabled to protect assets.',
+        });
+      }
+    };
+
+    document.addEventListener('copy', handleCopy);
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('dragstart', handleDragStart);
+
+    return () => {
+      document.removeEventListener('copy', handleCopy);
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('dragstart', handleDragStart);
+    };
+  }, []);
+
   return (
     <Router>
       <motion.div
