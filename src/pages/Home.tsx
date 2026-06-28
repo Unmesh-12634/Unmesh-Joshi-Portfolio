@@ -757,6 +757,7 @@ export function Home() {
 
   const certificates = [
     { title: 'Mobile Device & Application Security Workshop', authority: 'CUSAT & IIT Jammu' },
+    { title: 'AI-Machine Learning Engineer', authority: 'Reliance Foundation & Skill India' },
     { title: 'Oracle Generative AI Professional', authority: 'Oracle' },
     { title: 'IBM SkillBuild Frontend Web Development', authority: 'IBM / CSRBOX' },
     { title: 'Google Cloud Gen AI Academy', authority: 'Google Cloud' },

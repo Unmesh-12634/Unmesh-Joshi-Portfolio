@@ -37,6 +37,17 @@ export function Certificates() {
       category: 'other'
     },
     {
+      title: 'AI-Machine Learning Engineer Certificate Course',
+      organizer: 'Reliance Foundation & Skill India',
+      description: 'Successfully completed the 150-hour online skilling course on AI-Machine Learning Engineer Certificate Course offered by Reliance Foundation Skilling Academy through Skill India Digital Hub. Gained comprehensive knowledge and practical skills in AI/ML engineering, pipeline development, and model optimization.',
+      achievement: 'Certificate of Completion',
+      image: '/Courses/9UN00HSOS7.png',
+      date: 'February 01, 2026',
+      certificateId: '9UN00HSOS7',
+      type: 'course',
+      category: 'aiml'
+    },
+    {
       title: 'Oracle Cloud Infrastructure 2025 Certified Generative AI Professional',
       organizer: 'Oracle',
       description: 'Global professional certification from Oracle University. Validates comprehensive expertise in Large Language Models (LLMs), prompt engineering, Retrieval-Augmented Generation (RAG), fine-tuning models, and deploying generative AI pipelines on Oracle Cloud Infrastructure.',
