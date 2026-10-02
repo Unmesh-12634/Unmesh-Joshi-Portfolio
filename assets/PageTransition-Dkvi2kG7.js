@@ -1,0 +1,1 @@
+import{j as a}from"./vendor-CCnpsAPw.js";import{m as i}from"./motion-vendor-Cs0v3d_C.js";function n({children:t}){return a.jsx(i.div,{initial:{opacity:0,x:100,rotateY:10},animate:{opacity:1,x:0,rotateY:0},exit:{opacity:0,x:-100,rotateY:-10},transition:{duration:.6,ease:"easeInOut"},className:"min-h-screen",children:t})}export{n as P};
