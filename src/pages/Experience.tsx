@@ -1,7 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { PageTransition } from '../components/PageTransition';
-import { Code, Trophy, Users, Rocket, ChevronRight, Cpu, Terminal, Activity } from 'lucide-react';
+import { Code, Trophy, Users, Rocket, ChevronRight, ChevronLeft, Cpu, Terminal, Activity, Eye, X, Award } from 'lucide-react';
+
+interface ExperienceMedia {
+  src: string;
+  title: string;
+  category: 'Certificate' | 'App Screenshot' | 'Project Photo' | 'Stage Photo';
+  description?: string;
+}
 
 interface ExperienceItem {
   icon: React.ComponentType<{ className?: string }>;
@@ -15,58 +22,128 @@ interface ExperienceItem {
     load: string;
     integrity: string;
   };
+  media?: ExperienceMedia[];
 }
 
 const experiences: ExperienceItem[] = [
   {
-    icon: Code,
-    title: 'Technical Experience',
-    role: 'Full Stack Engineer',
-    date: '2024 - Present',
-    description: 'Built and deployed multiple interactive frontend projects using HTML, CSS, JavaScript, and React. Later expanded into backend development with Node.js and database integration to create full-stack applications.',
+    icon: Rocket,
+    title: 'CDA - Cranes Varsity Internship',
+    role: 'Project Lead / Intern',
+    date: '20 July 2026 – 24 August 2026',
+    description: 'Worked as the project lead during the internship and contributed to the development of the CDA Student Mobile Application. Worked on application development, project coordination, backend/full-stack implementation, and integration of required functionality.',
     achievements: [
-      'Currently exploring AI and ML technologies, learning frameworks like TensorFlow.',
-      'Integrating AI models into web-based projects.',
-      'Developed a strong problem-solving mindset through consistent practice in C, C++, and Python.',
+      'Project: CDA Student Mobile Application.',
+      'Served as Project Lead, coordinating project development, timelines, and implementation.',
+      'Contributed to application development, backend/full-stack implementation, and functionality integration.',
     ],
     systemMetrics: {
-      calibration: '98.6% NOMINAL',
-      load: '14.2% MINIMAL',
-      integrity: '100% SECURE'
-    }
+      calibration: '99.8% NOMINAL',
+      load: '100% COMPLETED',
+      integrity: '100% VERIFIED'
+    },
+    media: [
+      {
+        src: '/Internship/cranes_cda_certificate_of_accomplishment.jpg',
+        title: 'Certificate of Accomplishment – CDA Mobile Application',
+        category: 'Certificate',
+        description: 'Awarded to Unmesh Joshi for Outstanding contribution in developing Mobile Application for CDA - Cranes Digital Academy (20 July 2026 to 24 August 2026). Reg No: CL2026070301170571.'
+      },
+      {
+        src: '/Internship/cranes_cda_certificate_of_internship.jpg',
+        title: 'Certificate of Internship – Full Stack Java Development',
+        category: 'Certificate',
+        description: 'Official Project Internship Certificate on Full Stack Java Development conducted by Cranes Varsity, Bengaluru. Certificate No: CV/IN/0388/26-27.'
+      },
+      {
+        src: '/Internship/cranes_cda_completion_letter.jpg',
+        title: 'Official Internship Completion & Recommendation Letter',
+        category: 'Certificate',
+        description: 'Formal commendation letter from Cranes Varsity Private Limited recognizing project leadership and contribution to the Cranes Digital Academy Mobile Application.'
+      },
+      {
+        src: '/Internship/cranes_cda_award_ceremony.jpg',
+        title: 'Award Ceremony & Certificate Presentation',
+        category: 'Stage Photo',
+        description: 'Unmesh Joshi receiving the Certificate of Accomplishment and crystal trophy alongside Cranes Varsity leadership and faculty.'
+      },
+      {
+        src: '/Internship/cranes_cda_trophy.jpg',
+        title: 'Cranes Varsity Crystal Trophy – CDA Mobile App Project',
+        category: 'Project Photo',
+        description: 'Official crystal trophy awarded to Unmesh in recognition of outstanding contribution to the CDA Mobile App Project.'
+      }
+    ]
+  },
+  {
+    icon: Code,
+    title: 'Full Stack Java Training',
+    role: 'Advanced Diploma Graduate',
+    date: 'Cranes Varsity',
+    description: 'Completed an intensive Advanced Diploma in Full Stack Java Development at Cranes Varsity. Mastered enterprise-grade backend architecture, object-oriented design, and database integration.',
+    achievements: [
+      'Core & Enterprise: Java, Java 17, Spring Boot, Maven, JPA, Hibernate.',
+      'APIs & Data: REST APIs, H2 Database, SQL, Relational schema design and transactional management.',
+      'Full Stack: End-to-end backend development and client-server integration.',
+    ],
+    systemMetrics: {
+      calibration: '99.5% ACCREDITED',
+      load: 'PRODUCTION_READY',
+      integrity: '100% VERIFIED'
+    },
+    media: [
+      {
+        src: '/Courses/Full Stack.png',
+        title: 'Advanced Diploma in Full Stack Java Development',
+        category: 'Certificate',
+        description: 'Official Cranes Varsity credential covering Java 17, Spring Boot, JPA, and enterprise backend engineering.'
+      }
+    ]
   },
   {
     icon: Trophy,
-    title: 'Hackathon & Leadership',
-    role: 'Technical Team Leader',
+    title: 'Hackathon Leadership',
+    role: 'Technical Team Leader & Finalist',
     date: '2025 - Present',
-    description: 'Participated in 10+ hackathons, contributing to ideation, development, and final presentations.',
+    description: 'Finalist in 15+ hackathons, leading multi-disciplinary squads in fast-paced 24-48h national hackathons and building functional prototypes from scratch.',
     achievements: [
-      'Top 40 Finalist in a national-level hackathon, invited to the finals at Microsoft Gurugram.',
-      'Led multiple teams in inter-college and national hackathons, including Smart India Hackathon (SIH).',
-      'Strengthened leadership, teamwork, and technical collaboration skills through real-world challenges.',
+      'Winner (1st Place) at Google Lakecity Hackathon 2026 out of 3,000+ national teams.',
+      '1st Runner Up (2nd Position) at SPSU Udaipur (AI-Slingshot Hackathon / Panache 2026).',
+      'Top 300 out of ~15,000 participants in Hack with UttarPradesh (CU Lucknow).',
+      'Top 40 Finalist at HackWithIndia @ Microsoft Gurgaon.',
+      'Smart India Hackathon (SIH) 2026 (AeroX product) and SIH 2025.',
     ],
     systemMetrics: {
-      calibration: '99.4% OPTIMIZED',
-      load: '38.9% ACTIVE',
-      integrity: '100% SECURE'
-    }
-  },
-  {
-    icon: Users,
-    title: 'Community & Freelance',
-    role: 'Freelance Developer',
-    date: '2024 - 2025',
-    description: 'Active member of college tech clubs, contributing to events, mentorship, and collaborative projects.',
-    achievements: [
-      'Started freelancing, developing web applications and assisting others with frontend design.',
-      'Contributed to open-source projects, focusing on innovative web and AI-based solutions.',
-    ],
-    systemMetrics: {
-      calibration: '95.2% ALIGNED',
-      load: '8.4% IDLE',
-      integrity: '100% SECURE'
-    }
+      calibration: '99.7% OPTIMIZED',
+      load: '15+ HACKATHONS',
+      integrity: '100% VERIFIED'
+    },
+    media: [
+      {
+        src: '/Hackathons/google_lakecity_hackathon.jpg',
+        title: 'Google Lakecity Hackathon 2026 - Winner 1st Place',
+        category: 'Certificate',
+        description: '1st Place Merit Certificate at Google Lakecity Hackathon 2026 out of 3,000+ national teams.'
+      },
+      {
+        src: '/Hackathons/moment_group.png',
+        title: 'Team Meducators - Victory Ceremony',
+        category: 'Stage Photo',
+        description: 'Team Meducators receiving first place trophy on stage at Google Lakecity Hackathon.'
+      },
+      {
+        src: '/Hackathons/spsu_group_victory.jpg',
+        title: 'Team JUGAD Junction - 1st Runner Up',
+        category: 'Stage Photo',
+        description: 'Stage victory celebration at SPSU Udaipur Panache 2026 AI-Slingshot Hackathon.'
+      },
+      {
+        src: '/Hackathons/Microsoft Top 40.png',
+        title: 'Microsoft Gurgaon BuildwithDelhi - Top 40',
+        category: 'Certificate',
+        description: 'Certificate of Achievement for Top 40 finish among 1,000+ national squads.'
+      }
+    ]
   },
   {
     icon: Users,
@@ -76,28 +153,30 @@ const experiences: ExperienceItem[] = [
     description: 'Serving as the official HackerRank College Ambassador on campus, promoting competitive programming, organizing technical contests, and fostering data structures & algorithms problem-solving culture among students.',
     achievements: [
       'Organized and hosted multiple campus-wide coding contests and hackathons on the HackerRank platform.',
-      'Mentored and guided fellow students in strengthening their DSA concepts and preparing for technical interviews.',
-      'Represented HackerRank locally, bridging the gap between student programming communities and industry hiring standards.',
+      'Mentored and guided fellow students in strengthening their DSA concepts and preparing for technical challenges.',
+      'Represented HackerRank locally, bridging student developer communities with industry standards.',
     ],
     systemMetrics: {
       calibration: '98.8% EXCELLENT',
-      load: '15.4% STEADY',
-      integrity: '100% SECURE'
+      load: 'COMMUNITY_LEAD',
+      integrity: '100% ACTIVE'
     }
   },
   {
-    icon: Rocket,
-    title: 'Current Focus',
-    role: 'AI Systems Integration',
-    date: '2026',
-    description: 'Advancing in AI/ML integration with web technologies and exploring backend frameworks and production-level AI systems.',
+    icon: Cpu,
+    title: 'Technical Projects',
+    role: 'Full Stack & AI Developer',
+    date: '2024 - Present',
+    description: 'Hands-on experience developing AI-powered applications, RAG pipelines, modern web applications, and intelligent automation systems.',
     achievements: [
-      'Building a portfolio of intelligent, impactful applications.',
+      'Engineered AeroX (SIH 2026) and SENTI (Multimodal AI Desktop Assistant with OS & voice automation).',
+      'Built Meducate (AI Medical Learning Platform) and HackMate (Real-Time Team Matching Platform).',
+      'Implemented RAG pipelines with LangChain, ChromaDB, and Google Gemini Pro; developed computer vision systems with OpenCV and YOLOv8.',
     ],
     systemMetrics: {
       calibration: '99.9% PRECISE',
       load: '54.5% STABLE',
-      integrity: '100% SECURE'
+      integrity: '100% NOMINAL'
     }
   },
 ];
@@ -139,10 +218,32 @@ function useTypingEffect(text: string, speed: number = 12) {
 
 export function Experience() {
   const [activeTab, setActiveTab] = useState(0);
+  const [activeMediaIndex, setActiveMediaIndex] = useState<number | null>(null);
   const activeExp = experiences[activeTab];
   
   // Custom typing effect for the active milestone description
   const { displayText, isFinished, skip } = useTypingEffect(activeExp.description, 10);
+
+  // Keyboard navigation for photo & certificate lightbox
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (activeMediaIndex === null || !activeExp.media) return;
+      if (e.key === 'Escape') setActiveMediaIndex(null);
+      if (e.key === 'ArrowLeft') {
+        setActiveMediaIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : activeExp.media!.length - 1));
+      }
+      if (e.key === 'ArrowRight') {
+        setActiveMediaIndex((prev) => (prev !== null && prev < activeExp.media!.length - 1 ? prev + 1 : 0));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeMediaIndex, activeExp]);
+
+  // Reset active media preview when switching tabs
+  useEffect(() => {
+    setActiveMediaIndex(null);
+  }, [activeTab]);
 
   const Icon = activeExp.icon;
 
@@ -316,6 +417,48 @@ export function Experience() {
                   </motion.div>
                 </div>
 
+                {/* Photo & Certificate Verification Section */}
+                {activeExp.media && activeExp.media.length > 0 && (
+                  <div className="pt-6 border-t border-sohub-dark-grey/60 pointer-events-auto">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[10px] font-mono text-sohub-white uppercase tracking-wider font-bold flex items-center gap-2">
+                        <Award className="w-3.5 h-3.5 text-amber-400" />
+                        Verified Photos & Credentials // ({activeExp.media.length} Records)
+                      </span>
+                      <span className="text-[9px] font-mono text-emerald-400 uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/25 px-2 py-0.5">
+                        ● Verified Records
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {activeExp.media.map((item, mIdx) => (
+                        <div
+                          key={item.title + mIdx}
+                          onClick={() => setActiveMediaIndex(mIdx)}
+                          className="group/thumb border border-sohub-dark-grey hover:border-sohub-white/70 bg-black/60 p-2 cursor-pointer transition-all duration-200 relative overflow-hidden flex flex-col justify-between"
+                        >
+                          <div className="relative aspect-[4/3] bg-sohub-black/80 overflow-hidden mb-2 border border-white/5">
+                            <img
+                              src={item.src}
+                              alt={item.title}
+                              className="w-full h-full object-cover object-center group-hover/thumb:scale-105 transition-transform duration-300"
+                            />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center">
+                              <Eye className="w-4 h-4 text-white" />
+                            </div>
+                            <span className="absolute bottom-1 left-1 font-mono text-[8px] uppercase tracking-wider bg-black/90 px-1.5 py-0.5 text-white/90 border border-white/10 font-bold">
+                              {item.category}
+                            </span>
+                          </div>
+                          <p className="text-[10px] font-mono text-sohub-white font-semibold truncate leading-tight group-hover/thumb:text-amber-300 transition-colors">
+                            {item.title}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
               </div>
 
               {/* Console Footer Telemetry Bar */}
@@ -415,6 +558,93 @@ export function Experience() {
 
         </div>
       </div>
+
+      {/* Fullscreen Lightbox / Certificate Verification Modal */}
+      <AnimatePresence>
+        {activeMediaIndex !== null && activeExp.media && activeExp.media[activeMediaIndex] && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex flex-col items-center justify-center p-4 md:p-8"
+            onClick={() => setActiveMediaIndex(null)}
+          >
+            <div 
+              className="relative max-w-4xl w-full bg-[#0d0d10] border-2 border-white/20 p-4 md:p-6 shadow-[0_20px_70px_rgba(0,0,0,0.9)] flex flex-col max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Top Bar */}
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-[10px] bg-white/10 text-white px-2 py-0.5 uppercase tracking-wider font-bold border border-white/20">
+                    {activeExp.media[activeMediaIndex].category}
+                  </span>
+                  <h4 className="text-xs md:text-base font-bold text-white uppercase font-display truncate">
+                    {activeExp.media[activeMediaIndex].title}
+                  </h4>
+                </div>
+                <button
+                  onClick={() => setActiveMediaIndex(null)}
+                  className="p-1.5 text-white/60 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  title="Close inspection"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Modal Main Image Preview */}
+              <div className="relative flex-grow flex items-center justify-center overflow-hidden min-h-[300px] max-h-[60vh] bg-black/60 border border-white/5">
+                <img
+                  src={activeExp.media[activeMediaIndex].src}
+                  alt={activeExp.media[activeMediaIndex].title}
+                  className="max-w-full max-h-[60vh] object-contain select-none shadow-lg"
+                />
+
+                {/* Prev/Next buttons if multiple */}
+                {activeExp.media.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveMediaIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : activeExp.media!.length - 1));
+                      }}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 p-2.5 bg-black/80 border border-white/20 hover:bg-white hover:text-black text-white transition-all cursor-pointer shadow-lg"
+                      title="Previous record"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveMediaIndex((prev) => (prev !== null && prev < activeExp.media!.length - 1 ? prev + 1 : 0));
+                      }}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 bg-black/80 border border-white/20 hover:bg-white hover:text-black text-white transition-all cursor-pointer shadow-lg"
+                      title="Next record"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Modal Footer Description & Badge */}
+              <div className="mt-4 pt-3 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] font-mono text-sohub-grey">
+                <p className="font-sans text-xs text-white/90">
+                  {activeExp.media[activeMediaIndex].description || activeExp.media[activeMediaIndex].title}
+                </p>
+                <div className="flex items-center gap-3">
+                  <span className="text-emerald-400 font-bold tracking-widest uppercase">
+                    VERIFIED // {activeExp.title}
+                  </span>
+                  <span className="bg-white/10 px-2 py-0.5 text-white font-bold">
+                    {activeMediaIndex + 1} / {activeExp.media.length}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style>{`
         @keyframes blink {

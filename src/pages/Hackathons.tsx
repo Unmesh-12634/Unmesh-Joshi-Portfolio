@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PageTransition } from '../components/PageTransition';
 import { Link } from 'react-router-dom';
-import { Trophy, Calendar, Users, Cpu, FileText, ArrowRight, ExternalLink, Award, ChevronDown, Linkedin } from 'lucide-react';
+import { Trophy, Calendar, Users, Cpu, FileText, ArrowRight, ExternalLink, Award, ChevronDown, ChevronLeft, ChevronRight, Check, Linkedin } from 'lucide-react';
 
 interface HackathonImage {
   src: string;
@@ -196,22 +196,60 @@ export function Hackathons() {
       ]
     },
     {
+      title: 'Smart India Hackathon (SIH) 2026',
+      organizer: 'Ministry of Education & AICTE',
+      project: 'AeroX - Hackathon Product',
+      role: 'Project Lead / Full Stack Developer',
+      team: '6 Members',
+      tech: 'React, TypeScript, Tailwind CSS, Python, Fast APIs',
+      description: 'Engineered AeroX for Smart India Hackathon (SIH) 2026 — an innovative hackathon product engineering solution built for rapid aerial and transport intelligence. Led development, architecture design, and system integration under national hackathon guidelines.',
+      achievement: 'SIH 2026 Innovation Product',
+      image: '/Projects/aerox.png',
+      date: '2026',
+      learning: 'Engineered high-efficiency full-stack workflows, real-time sync pipelines, and system architectures under SIH problem specifications.',
+      metrics: [
+        { label: 'Edition', value: 'SIH 2026' },
+        { label: 'Product', value: 'AeroX' },
+        { label: 'Scale', value: 'National Level' },
+        { label: 'Organizer', value: 'MoE & AICTE' }
+      ]
+    },
+    {
       title: 'Hack with UttarPradesh',
       organizer: 'Chandigarh University Technology Business Incubator',
       project: 'AI Prototype Sprint',
-      role: 'Participant / AI Developer',
+      role: 'Top 300 Finalist / AI Developer',
       team: 'Individual',
       tech: 'React, Tailwind CSS, AI APIs',
-      description: 'Participated in Hack with UttarPradesh 2025 at CU Lucknow Campus. During the event, connected via Discord video call with the co-founders of Blackbox AI, the popular coding and AI orchestration platform, which was founded by the three brothers: Roger Rizk, Richard Rizk, and Robert Rizk.',
-      achievement: 'Certificate of Participation',
+      description: 'Ranked in the Top 300 among ~15,000 participants across India in Hack with UttarPradesh 2025 at CU Lucknow Campus. Connected via Discord video call with the co-founders of Blackbox AI (Roger Rizk, Richard Rizk, and Robert Rizk) to discuss developer tooling and AI agent architectures.',
+      achievement: 'Top 300 (15,000+ Participants)',
       image: '/Hackathons/hack_with_uttarpradesh_2025.png',
       date: 'November 1-2, 2025',
-      learning: 'Gained insights into AI orchestration workflows and interacted with leading industry tool creators.',
+      learning: 'Gained insights into large-scale AI orchestration workflows and interacted with leading industry tool creators.',
       metrics: [
-        { label: 'Role', value: 'Developer' },
+        { label: 'Rank', value: 'Top 300' },
+        { label: 'Participants', value: '15,000+' },
         { label: 'Venue', value: 'CU Lucknow Campus' },
-        { label: 'Focus', value: 'AI Tools' },
-        { label: 'Partner', value: 'Blackbox AI' }
+        { label: 'Network', value: 'Blackbox AI' }
+      ]
+    },
+    {
+      title: 'Smart India Hackathon (SIH) 2025',
+      organizer: 'Ministry of Education & AICTE',
+      project: 'National Innovation Prototype',
+      role: 'Full Stack Developer',
+      team: '6 Members',
+      tech: 'Python, React, Node.js',
+      description: 'Participated in Smart India Hackathon (SIH) 2025, solving complex technical challenges presented by central ministries and government agencies with an end-to-end full stack solution.',
+      achievement: 'Certificate of Participation',
+      image: '/Hackathons/Hack2skill-Certificate.png',
+      date: '2025',
+      learning: 'Collaborated in nationwide team environments to architect scalable solutions for national problem statements.',
+      metrics: [
+        { label: 'Edition', value: 'SIH 2025' },
+        { label: 'Scale', value: 'Nationwide' },
+        { label: 'Level', value: 'National Level' },
+        { label: 'Organizer', value: 'AICTE / MoE' }
       ]
     },
     {
@@ -253,13 +291,13 @@ export function Hackathons() {
       ]
     },
     {
-      title: 'Hack2skill - ISRO Hackathon',
-      organizer: 'Hack2skill & ISRO',
+      title: 'ISRO Bharatiya Antariksh Hackathon',
+      organizer: 'ISRO & Hack2skill',
       project: 'Satellite Geopixel Mapper',
       role: 'AI Developer',
       team: 'Individual',
       tech: 'React, Map Coordinates APIs, Node.js',
-      description: 'Participated in a hackathon organized in collaboration with ISRO. Engineered a coordinate plotting framework that parses geospatial satellite telemetry feeds to render tracking maps.',
+      description: 'Participated in the Bharatiya Antariksh Hackathon organized in collaboration with ISRO. Engineered a coordinate plotting framework that parses geospatial satellite telemetry feeds to render tracking maps.',
       achievement: 'Certificate of Participation',
       image: '/Hackathons/Hack2skill- ISRO Certificate.png',
       date: '2025',
@@ -353,10 +391,15 @@ export function Hackathons() {
         {/* Header Title */}
         <div className="border-b border-sohub-dark-grey pb-8 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <span className="text-xxs uppercase tracking-widest text-sohub-grey font-bold block mb-2">Hackathon Logs</span>
+            <span className="text-xxs uppercase tracking-widest text-amber-500 font-bold block mb-2 font-mono">
+              ★ 15+ Hackathon Finalist &bull; National Record
+            </span>
             <h1 className="text-4xl md:text-7xl font-display-title font-extrabold uppercase leading-none text-sohub-white">
               HACKATHONS
             </h1>
+            <p className="text-xs text-sohub-grey font-mono mt-3 max-w-xl leading-relaxed">
+              Winner at Google Lakecity (3,000+ teams), 1st Runner Up at SPSU, Top 40 at Microsoft Gurgaon, Top 300 at HackWithUP (15,000+ participants), and SIH 2026 builder.
+            </p>
           </div>
           <Link
             to="/certificates"
@@ -367,79 +410,182 @@ export function Hackathons() {
           </Link>
         </div>
 
-        {/* Dropdown Selector */}
-        <div className="relative max-w-xl mx-auto mb-16 z-40">
-          <label className="text-[9px] uppercase font-mono font-bold tracking-widest text-sohub-grey block mb-2 text-center">
-            Select Hackathon System Node
-          </label>
-          <button
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="w-full flex items-center justify-between px-6 py-4 bg-sohub-dark-grey/20 backdrop-blur-md border border-sohub-dark-grey hover:border-sohub-soft-grey/30 transition-all text-left text-sm font-semibold tracking-wide text-sohub-white group cursor-pointer"
-          >
-            <div className="flex items-center gap-3">
-              <div className={`w-2 h-2 rounded-full ${
-                theme === 'winner'
-                  ? 'bg-amber-400 animate-pulse'
-                  : theme === 'runner-up'
-                  ? 'bg-slate-300 animate-pulse'
-                  : 'bg-emerald-500 animate-pulse'
-              }`} />
-              <span>{currentHack.title}</span>
+        {/* System Node Selector: High Visibility Cyber Navigation Deck */}
+        <div className="mb-16 z-40 space-y-4">
+          
+          {/* Deck Header & Controls */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sohub-dark-grey pb-3">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+              <label className="text-[11px] uppercase font-mono font-bold tracking-widest text-sohub-white">
+                SELECT HACKATHON SYSTEM NODE // NODE_0{selectedHack + 1} OF 0{hackathons.length}
+              </label>
             </div>
-            <div className="flex items-center gap-2">
-              <span className={`text-[9px] font-mono px-2 py-0.5 uppercase tracking-wider ${
-                theme === 'winner'
-                  ? 'bg-amber-500/10 text-amber-500 dark:text-amber-400 border border-amber-500/20'
-                  : theme === 'runner-up'
-                  ? 'bg-slate-400/15 text-slate-500 dark:text-slate-300 border border-slate-400/20'
-                  : 'bg-sohub-dark-grey/40 text-sohub-grey border border-sohub-dark-grey'
-              }`}>
-                {theme === 'winner' ? 'Winner' : theme === 'runner-up' ? 'Runner Up' : 'Participant'}
-              </span>
-              <ChevronDown className={`w-4 h-4 text-sohub-grey transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
-            </div>
-          </button>
 
-          <AnimatePresence>
-            {isDropdownOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="absolute left-0 right-0 mt-2 bg-sohub-black border border-sohub-dark-grey shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden z-50 backdrop-blur-xl"
+            {/* Quick Next/Prev Stepper */}
+            <div className="flex items-center gap-2 self-start sm:self-auto font-mono text-[10px]">
+              <button
+                onClick={() => setSelectedHack((prev) => (prev > 0 ? prev - 1 : hackathons.length - 1))}
+                className="px-3 py-1.5 border border-white/20 bg-sohub-black/80 hover:bg-white hover:text-black hover:border-white text-sohub-white transition-all flex items-center gap-1 cursor-pointer font-bold"
+                title="Previous Hackathon"
               >
-                <div className="max-h-72 overflow-y-auto divide-y divide-sohub-dark-grey/30 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-                  {hackathons.map((hack, index) => {
-                    const hTheme = getCardTheme(hack.achievement);
-                    const isSelected = selectedHack === index;
-                    
-                    return (
-                      <button
-                        key={hack.title}
-                        onClick={() => {
-                          setSelectedHack(index);
-                          setIsDropdownOpen(false);
-                        }}
-                        className={`w-full flex items-center justify-between px-6 py-4 text-left transition-all text-xs cursor-pointer ${
-                          isSelected 
-                            ? 'bg-sohub-dark-grey/40 text-sohub-white font-bold border-l-2 border-sohub-soft-grey' 
-                            : 'text-sohub-grey hover:bg-sohub-dark-grey/20 hover:text-sohub-white'
-                        }`}
-                      >
-                        <span>{hack.title}</span>
-                        <span className={`text-[8px] font-mono px-1.5 py-0.5 uppercase tracking-wider ${
-                          hTheme === 'winner' ? 'text-amber-500 dark:text-amber-400 bg-amber-500/10' : hTheme === 'runner-up' ? 'text-slate-500 dark:text-slate-300 bg-slate-400/10' : 'text-sohub-grey bg-sohub-dark-grey/40'
-                        }`}>
-                          {hTheme === 'winner' ? 'Winner' : hTheme === 'runner-up' ? 'Runner Up' : 'Normal'}
-                        </span>
-                      </button>
-                    );
-                  })}
+                <ChevronLeft className="w-3.5 h-3.5" />
+                <span>PREV NODE</span>
+              </button>
+              <button
+                onClick={() => setSelectedHack((prev) => (prev < hackathons.length - 1 ? prev + 1 : 0))}
+                className="px-3 py-1.5 border border-white/20 bg-sohub-black/80 hover:bg-white hover:text-black hover:border-white text-sohub-white transition-all flex items-center gap-1 cursor-pointer font-bold"
+                title="Next Hackathon"
+              >
+                <span>NEXT NODE</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Node Pills (Horizontal scrollable on mobile, flex-wrap on desktop) */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            {hackathons.map((hack, index) => {
+              const hTheme = getCardTheme(hack.achievement);
+              const isSelected = selectedHack === index;
+              return (
+                <button
+                  key={hack.title}
+                  onClick={() => setSelectedHack(index)}
+                  className={`flex-shrink-0 flex items-center gap-2 px-3.5 py-2 text-left font-mono text-[11px] uppercase tracking-wider border transition-all duration-200 cursor-pointer ${
+                    isSelected
+                      ? 'border-sohub-white bg-sohub-white text-sohub-black font-extrabold shadow-[0_0_20px_rgba(255,255,255,0.25)]'
+                      : 'border-sohub-dark-grey/80 bg-sohub-black/60 text-sohub-grey hover:border-sohub-white/40 hover:text-sohub-white'
+                  }`}
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full ${
+                    hTheme === 'winner'
+                      ? isSelected ? 'bg-amber-600' : 'bg-amber-400'
+                      : hTheme === 'runner-up'
+                      ? isSelected ? 'bg-slate-700' : 'bg-slate-300'
+                      : isSelected ? 'bg-emerald-700' : 'bg-emerald-400'
+                  }`} />
+                  <span className="font-bold">0{index + 1}</span>
+                  <span className="hidden sm:inline font-sans truncate max-w-[120px] md:max-w-[160px] font-semibold">
+                    {hack.title}
+                  </span>
+                  {hTheme === 'winner' && <span className="text-[9px] font-bold">🏆</span>}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Prominent Command Bar / Dropdown Trigger */}
+          <div className="relative">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="w-full flex flex-col md:flex-row md:items-center justify-between p-4 md:px-6 md:py-4 bg-[#111115] border-2 border-white/25 hover:border-white/50 transition-all text-left shadow-[0_10px_30px_rgba(0,0,0,0.5)] cursor-pointer group"
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-3 h-3 rounded-full flex-shrink-0 ${
+                  theme === 'winner'
+                    ? 'bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.9)] animate-pulse'
+                    : theme === 'runner-up'
+                    ? 'bg-slate-300 shadow-[0_0_10px_rgba(203,213,225,0.8)] animate-pulse'
+                    : 'bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)] animate-pulse'
+                }`} />
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[10px] text-amber-400 font-bold uppercase tracking-widest">
+                      NODE_0{selectedHack + 1} // ACTIVE
+                    </span>
+                    <span className="text-sohub-grey font-mono text-[10px]">• {currentHack.organizer}</span>
+                  </div>
+                  <h3 className="text-base md:text-lg font-bold text-white uppercase tracking-wider font-display mt-0.5 group-hover:text-sohub-soft-grey transition-colors">
+                    {currentHack.title}
+                  </h3>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              </div>
+
+              <div className="flex items-center gap-3 mt-3 md:mt-0 pt-2 md:pt-0 border-t md:border-0 border-white/10 justify-between md:justify-end">
+                <span className={`text-[10px] font-mono px-3 py-1 uppercase tracking-wider font-bold border ${
+                  theme === 'winner'
+                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                    : theme === 'runner-up'
+                    ? 'bg-slate-400/20 text-slate-200 border-slate-400/40'
+                    : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                }`}>
+                  {theme === 'winner' ? '🏆 Winner - 1st Place' : theme === 'runner-up' ? '🥈 1st Runner Up' : '⚡ National Finalist'}
+                </span>
+
+                <div className="flex items-center gap-1.5 font-mono text-[11px] text-white/80 group-hover:text-white transition-colors bg-white/5 border border-white/20 px-3 py-1">
+                  <span>{isDropdownOpen ? 'CLOSE LIST' : 'VIEW ALL NODES'}</span>
+                  <ChevronDown className={`w-4 h-4 text-white transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                </div>
+              </div>
+            </button>
+
+            {/* High-Contrast Dropdown Menu */}
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-0 right-0 mt-2 bg-[#0c0c10] border-2 border-white/30 shadow-[0_25px_60px_rgba(0,0,0,0.8)] overflow-hidden z-50 backdrop-blur-2xl"
+                >
+                  <div className="p-3 bg-white/5 border-b border-white/10 flex justify-between items-center text-[10px] font-mono text-sohub-grey uppercase tracking-widest">
+                    <span>Available Hackathon Nodes ({hackathons.length})</span>
+                    <span>Click any item to load</span>
+                  </div>
+                  <div className="max-h-80 overflow-y-auto divide-y divide-white/10 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+                    {hackathons.map((hack, index) => {
+                      const hTheme = getCardTheme(hack.achievement);
+                      const isSelected = selectedHack === index;
+                      
+                      return (
+                        <button
+                          key={hack.title}
+                          onClick={() => {
+                            setSelectedHack(index);
+                            setIsDropdownOpen(false);
+                          }}
+                          className={`w-full flex items-center justify-between p-4 text-left transition-all text-xs cursor-pointer ${
+                            isSelected 
+                              ? 'bg-white/15 text-white font-bold border-l-4 border-white' 
+                              : 'text-sohub-grey hover:bg-white/5 hover:text-white'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="font-mono text-[10px] text-sohub-grey font-bold">
+                              0{index + 1}
+                            </span>
+                            <div>
+                              <div className="text-white font-bold text-xs md:text-sm">
+                                {hack.title}
+                              </div>
+                              <span className="text-[10px] text-sohub-grey font-mono block">
+                                {hack.organizer} • {hack.date}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <span className={`text-[9px] font-mono px-2 py-0.5 uppercase tracking-wider font-bold ${
+                              hTheme === 'winner' 
+                                ? 'text-amber-300 bg-amber-500/20 border border-amber-500/30' 
+                                : hTheme === 'runner-up' 
+                                ? 'text-slate-200 bg-slate-400/20 border border-slate-400/30' 
+                                : 'text-emerald-300 bg-emerald-500/20 border border-emerald-500/30'
+                            }`}>
+                              {hTheme === 'winner' ? 'Winner' : hTheme === 'runner-up' ? 'Runner Up' : 'Finalist'}
+                            </span>
+                            {isSelected && <Check className="w-4 h-4 text-white" />}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Selected Hackathon Showcase Card */}

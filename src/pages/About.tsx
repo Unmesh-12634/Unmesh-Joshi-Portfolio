@@ -96,40 +96,37 @@ export function About() {
                 
                 <TiltCard className="border border-sohub-dark-grey bg-sohub-dark-grey/15 p-8 md:p-12 hover:border-sohub-white/20">
                   <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight text-sohub-white font-display mb-6">
-                    Engineering intelligent systems.<br />Building experiences that matter.
+                    Engineering full-stack systems.<br />Architecting intelligent AI solutions.
                   </h2>
                   <div className="space-y-4 text-xs md:text-sm text-sohub-grey font-medium leading-relaxed">
                     <p>
-                      I'm a{' '}
-                      <strong className="text-sohub-white">B.Tech Computer Science &amp; Engineering student</strong>{' '}
-                      at <strong className="text-sohub-white">Techno India NJR, Udaipur</strong>, focused on{' '}
-                      <strong className="text-sohub-white">Artificial Intelligence</strong>,{' '}
-                      <strong className="text-sohub-white">Machine Learning</strong>, and{' '}
-                      <strong className="text-sohub-white">Full-Stack Development</strong>.
-                      My work revolves around building intelligent systems, AI-powered products, and scalable web applications that combine strong engineering with meaningful user experiences.
+                      I am a{' '}
+                      <strong className="text-sohub-white">Computer Science &amp; Engineering student</strong>{' '}
+                      at <strong className="text-sohub-white">Techno NJR Institute of Technology, Udaipur</strong>{' '}
+                      (currently in 3rd Year / 5th Semester) and a{' '}
+                      <strong className="text-sohub-white">Full Stack Java &amp; AI/ML Developer</strong>.
+                      My work centers on building enterprise full-stack software, RAG architectures, multimodal AI assistants, and rapid hackathon solutions.
                     </p>
                     <p>
-                      I've built everything from{' '}
-                      <strong className="text-sohub-white">RAG pipelines</strong> and computer vision models to full-stack platforms and interactive digital products —
-                      always translating complex ideas into practical, real-world solutions.
+                      I completed an{' '}
+                      <strong className="text-sohub-white">Advanced Diploma in Full Stack Java Development</strong>{' '}
+                      at <strong className="text-sohub-white">Cranes Varsity</strong>, mastering Java 17, Spring Boot, Maven, JPA, Hibernate, REST APIs, H2 Database, and SQL. Following this training, I served as{' '}
+                      <strong className="text-sohub-white">Project Lead / Intern</strong> at Cranes Varsity for the{' '}
+                      <strong className="text-sohub-white">CDA Student Mobile Application</strong> (July – August 2026), steering application development, full-stack implementation, and end-to-end functionality integration.
                     </p>
                     <p>
-                      Competing in{' '}
-                      <strong className="text-sohub-white">20+ national-level hackathons</strong>{' '}
-                      and leading teams across AI and software engineering domains, my team secured{' '}
+                      As an active hackathon builder and finalist in{' '}
+                      <strong className="text-sohub-white">15+ national hackathons</strong>, my team secured{' '}
                       <strong className="text-sohub-white">1st Place at Google Lakecity Hackathon 2026</strong>{' '}
-                      for building <strong className="text-sohub-white">Meducators</strong> — an AI-powered medical learning platform focused on enhancing healthcare education through intelligent learning experiences.
+                      among 3,000+ teams for building <strong className="text-sohub-white">Meducators</strong>,{' '}
+                      <strong className="text-sohub-white">1st Runner Up at SPSU Udaipur</strong>,{' '}
+                      <strong className="text-sohub-white">Top 40 at Microsoft Gurgaon</strong>, and developed{' '}
+                      <strong className="text-sohub-white">AeroX</strong> for <strong className="text-sohub-white">Smart India Hackathon (SIH) 2026</strong>.
                     </p>
                     <p>
-                      Beyond building systems, I serve as the{' '}
+                      Beyond development, I serve as the{' '}
                       <strong className="text-sohub-white">HackerRank College Ambassador</strong>{' '}
-                      for my campus. In this role, I organize coding contests, mentor fellow students in data structures and algorithms, and drive a vibrant competitive coding culture on campus.
-                    </p>
-                    <p>
-                      I believe great products emerge from the intersection of{' '}
-                      <strong className="text-sohub-white">engineering, creativity, and problem-solving</strong>.
-                      Whether developing AI workflows, designing full-stack systems, or collaborating with a team —
-                      the goal stays the same: build technology that creates measurable impact.
+                      for Techno NJR, driving algorithm workshops, coding contests, and mentoring peers in data structures and problem solving.
                     </p>
                   </div>
                 </TiltCard>
@@ -143,10 +140,10 @@ export function About() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
-                    { label: 'AI & Machine Learning', detail: 'RAG systems, computer vision, LLM integration, model deployment' },
-                    { label: 'Full-Stack Engineering', detail: 'React, Next.js, Node.js, FastAPI, SQL/NoSQL databases' },
-                    { label: 'Community & Leadership', detail: 'HackerRank College Ambassador, tech community mentor, and leading 20+ national hackathon teams' },
-                    { label: 'Product Design', detail: 'Interactive UI/UX, Three.js, real-world impact-driven builds' },
+                    { label: 'Full Stack Java & Modern Web', detail: 'Java 17, Spring Boot, Maven, Hibernate/JPA, REST APIs, React.js, Next.js, Tailwind CSS' },
+                    { label: 'AI / ML & Generative AI', detail: 'RAG systems, ChromaDB, multi-agent frameworks, LLM integration, Python, FastAPI' },
+                    { label: 'Hackathons & Rapid Prototyping', detail: 'Winner at Google Lakecity (3000+ teams), SIH 2026 (AeroX), SPSU 1st Runner Up, 15+ finalist records' },
+                    { label: 'Leadership & Community', detail: 'Project Lead at Cranes Varsity, HackerRank College Ambassador, campus coding mentor' },
                   ].map(({ label, detail }) => (
                     <div key={label} className="border border-sohub-dark-grey bg-sohub-dark-grey/10 p-5 hover:border-sohub-white/20 transition-colors">
                       <h4 className="text-[11px] font-bold text-sohub-white uppercase tracking-wider mb-1.5">{label}</h4>
@@ -175,7 +172,9 @@ export function About() {
                   {/* Name / Role label */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
                     <span className="text-[9px] font-mono uppercase tracking-widest text-white/50 block mb-1">UNMESH JOSHI</span>
-                    <span className="text-[12px] font-bold uppercase tracking-wider text-white">AI Engineer · Full-Stack Developer</span>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-white block">
+                      Full Stack Java · AI/ML Developer · Hackathon Builder
+                    </span>
                   </div>
 
                   {/* Top-right status badge */}

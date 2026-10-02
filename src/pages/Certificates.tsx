@@ -27,23 +27,44 @@ export function Certificates() {
 
   const courses: Credential[] = [
     {
-      title: 'National Workshop on "Mobile Device and Application Security"',
-      organizer: 'CUSAT, IIT Jammu & ISEA',
-      description: 'Completed a five-day National Workshop on Mobile Device and Application Security organized by the Department of Computer Applications, Cochin University of Science and Technology (CUSAT), in collaboration with IIT Jammu under the ISEA project. The intensive training program focused on identification of vulnerabilities in mobile operating systems, secure coding patterns for mobile applications, threat landscape mapping, and defensive security measures, supported by the Ministry of Electronics and Information Technology (MeitY).',
-      achievement: 'Certificate of Participation',
-      image: '/Courses/mobile_device_and_application_security_workshop_2026.png',
-      date: 'February 23 - 26, 2026',
+      title: 'Certificate of Accomplishment – Mobile Application for CDA (Cranes Digital Academy)',
+      organizer: 'Cranes Varsity',
+      description: 'Awarded to Unmesh Joshi for outstanding contribution in architecting and developing the Mobile Application for CDA - Cranes Digital Academy during the project internship (20 July 2026 to 24 August 2026).',
+      achievement: 'Certificate of Accomplishment & Trophy Award',
+      image: '/Internship/cranes_cda_certificate_of_accomplishment.jpg',
+      date: 'August 24, 2026',
+      certificateId: 'CL2026070301170571',
       type: 'course',
-      category: 'other'
+      category: 'fullstack'
     },
     {
-      title: 'AI-Machine Learning Engineer Certificate Course',
-      organizer: 'Reliance Foundation & Skill India',
-      description: 'Successfully completed the 150-hour online skilling course on AI-Machine Learning Engineer Certificate Course offered by Reliance Foundation Skilling Academy through Skill India Digital Hub. Gained comprehensive knowledge and practical skills in AI/ML engineering, pipeline development, and model optimization.',
-      achievement: 'Certificate of Completion',
-      image: '/Courses/9UN00HSOS7.png',
-      date: 'February 01, 2026',
-      certificateId: '9UN00HSOS7',
+      title: 'Certificate of Internship – Full Stack Java Development',
+      organizer: 'Cranes Varsity, Bengaluru',
+      description: 'Successfully completed intensive 1-month Project Internship on Full Stack Java Development (20 July 2026 to 24 August 2026) conducted by Cranes Varsity, Bengaluru.',
+      achievement: 'Certificate of Internship',
+      image: '/Internship/cranes_cda_certificate_of_internship.jpg',
+      date: 'August 24, 2026',
+      certificateId: 'CV/IN/0388/26-27',
+      type: 'course',
+      category: 'fullstack'
+    },
+    {
+      title: 'Advanced Diploma in Full Stack Java Development',
+      organizer: 'Cranes Varsity',
+      description: 'Comprehensive professional advanced training in enterprise Java ecosystem: Java 17, Spring Boot, Maven, JPA, Hibernate, REST APIs, H2 Database, SQL, and robust backend/full-stack application architecture.',
+      achievement: 'Advanced Diploma / Professional Certification',
+      image: '/Courses/Full Stack.png',
+      date: '2026',
+      type: 'course',
+      category: 'fullstack'
+    },
+    {
+      title: 'Oracle Certified Foundations Associate – Agentic AI Certified Foundations Associate',
+      organizer: 'Oracle',
+      description: 'Official global certification from Oracle validating competencies in Agentic AI design, autonomous agent workflows, tool calling, multi-agent coordination, and enterprise AI architectures.',
+      achievement: 'Oracle Certified Foundations Associate',
+      image: '/Courses/Oracle.png',
+      date: '2026',
       type: 'course',
       category: 'aiml'
     },
@@ -59,9 +80,9 @@ export function Certificates() {
       category: 'aiml'
     },
     {
-      title: 'Gen AI Academy 2.0',
+      title: 'Google Cloud Gen AI Academy 2.0 – AI/ML Learning Track',
       organizer: 'Google Cloud & Hack2skill',
-      description: 'Successfully completed the AI/ML learning track of the Gen AI Academy 2.0. Gained hands-on skills in data preparation using Dataprep and Dataflow, Apache Spark execution on Dataproc, and integrating key machine learning APIs (Natural Language, Speech-to-Text, Video Intelligence, and Document AI) for automated data extraction pipelines.',
+      description: 'Successfully completed the AI/ML learning track of Gen AI Academy 2.0. Gained hands-on skills in data preparation using Dataprep and Dataflow, Apache Spark execution on Dataproc, and integrating key machine learning APIs (Natural Language, Speech-to-Text, Video Intelligence, and Document AI).',
       achievement: 'Completion Certificate',
       image: '/Courses/google_genai_2_0.png',
       date: 'December 26, 2025',
@@ -71,11 +92,63 @@ export function Certificates() {
     },
     {
       title: 'AWS Cloud Practitioner Essentials',
-      organizer: 'AWS',
+      organizer: 'Amazon Web Services (AWS)',
       description: 'Completed the official AWS Training & Certification course covering cloud concepts, AWS core services, security, architecture, pricing models, and cloud support options.',
       achievement: 'Completion Certificate',
       image: '/Courses/aws_cloud_practitioner.png',
       date: 'December 21, 2025',
+      type: 'course',
+      category: 'other'
+    },
+    {
+      title: 'Full Stack Developer Bootcamp',
+      organizer: 'GeeksforGeeks',
+      description: 'Hands-on training in full stack web engineering, covering algorithms, frontend design patterns, backend API development, databases, and production project deployment.',
+      achievement: 'Bootcamp Completion Certificate',
+      image: '/Courses/Full Stack.png',
+      date: '2025',
+      type: 'course',
+      category: 'fullstack'
+    },
+    {
+      title: 'IBM SkillsBuild PBL – Front End Web Development',
+      organizer: 'CSRBOX Foundation & IBM SkillsBuild',
+      description: 'Successfully completed the IBM SkillsBuild Project Based Learning Program - Front End Web Development with CSRBOX. Mastered responsive frontend design, semantic markup, asynchronous JavaScript, and component patterns.',
+      achievement: 'Certificate of Completion',
+      image: '/Courses/IBM.png',
+      date: 'July - August 2025',
+      certificateId: 'IBM25PBL2337',
+      type: 'course',
+      category: 'fullstack'
+    },
+    {
+      title: 'Software Engineering Virtual Experience',
+      organizer: 'JPMorgan Chase & Co. / Forage',
+      description: 'Completed virtual software engineering modules including interface setup, financial data feed integration with perspective open-source library, and bug fixing.',
+      achievement: 'Certificate of Completion',
+      image: '',
+      date: '2025',
+      type: 'course',
+      category: 'other'
+    },
+    {
+      title: 'AI-Machine Learning Engineer Certificate Course',
+      organizer: 'Reliance Foundation & Skill India',
+      description: 'Successfully completed the 150-hour online skilling course on AI-Machine Learning Engineer Certificate Course offered by Reliance Foundation Skilling Academy through Skill India Digital Hub. Gained practical skills in ML pipelines, feature engineering, and model deployment.',
+      achievement: 'Certificate of Completion',
+      image: '/Courses/9UN00HSOS7.png',
+      date: 'February 01, 2026',
+      certificateId: '9UN00HSOS7',
+      type: 'course',
+      category: 'aiml'
+    },
+    {
+      title: 'National Workshop on "Mobile Device and Application Security"',
+      organizer: 'CUSAT, IIT Jammu & ISEA',
+      description: 'Completed a five-day National Workshop on Mobile Device and Application Security organized by CUSAT in collaboration with IIT Jammu under the ISEA project, supported by MeitY.',
+      achievement: 'Certificate of Participation',
+      image: '/Courses/mobile_device_and_application_security_workshop_2026.png',
+      date: 'February 23 - 26, 2026',
       type: 'course',
       category: 'other'
     },
@@ -88,28 +161,7 @@ export function Certificates() {
       date: '2024',
       type: 'course',
       category: 'other'
-    },
-    {
-      title: 'Full Stack Web Development',
-      organizer: 'Online Learning',
-      description: 'Comprehensive course covering MERN stack and modern web development practices.',
-      achievement: 'Completed with Distinction',
-      image: '/Courses/Full Stack.png',
-      date: '2024',
-      type: 'course',
-      category: 'fullstack'
-    },
-    {
-      title: 'IBM SkillBuild - Beginner\'s Guide to Front End Web Development',
-      organizer: 'CSRBOX Foundation & IBM SkillBuild',
-      description: 'Successfully completed the IBM SkillBuild Project Based Learning Program - Beginner\'s Guide to Front End Web Development with CSRBOX. Learned comprehensive front-end development skills including HTML, CSS, JavaScript, and modern web development practices.',
-      achievement: 'Certificate of Completion',
-      image: '/Courses/IBM.png',
-      date: 'July - August 2025',
-      certificateId: 'IBM25PBL2337',
-      type: 'course',
-      category: 'fullstack'
-    },
+    }
   ];
 
   const filteredCourses = courses.filter(

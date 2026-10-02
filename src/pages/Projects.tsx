@@ -8,38 +8,68 @@ export function Projects() {
 
   const projects = [
     {
-      title: 'MEDUCATE',
-      category: 'Healthcare AI',
+      title: 'CDA STUDENT MOBILE APPLICATION',
+      category: 'Mobile App & Full Stack Java',
       year: '2026',
-      description: 'Meducators is an AI-powered medical learning platform designed to make healthcare education more interactive, accessible, and personalized. The platform combines intelligent knowledge retrieval, immersive 3D learning experiences, and contextual AI assistance to help students explore complex medical concepts more effectively. Developed through the collaborative efforts of our team, Meducators, with key contributions from Tanmay Jain and myself, the platform was carefully designed and refined to create a meaningful impact in medical education. We worked closely together to build an engaging learning experience that bridges technology and healthcare education. The project focuses on enhancing the learning journey through innovation, accessibility, and real-world educational value.',
-      techStack: ['React', 'Vite', 'Supabase', 'Vertex AI'],
+      featured: true,
+      description: 'Engineered as Project Lead during the Cranes Varsity internship. Spearheaded the architecture and development of the student mobile application for CDA (Cranes Digital Academy), coordinating full-stack integration, backend REST APIs, student profiles, and live course modules. Recognized with the Certificate of Accomplishment and crystal trophy.',
+      techStack: ['Flutter', 'Java', 'Spring Boot', 'REST APIs', 'Supabase'],
       github: '',
-      live: 'https://meducate.vercel.app/',
+      live: '',
+    },
+    {
+      title: 'AEROX',
+      category: 'SIH 2026 Hackathon Product',
+      year: '2026',
+      featured: true,
+      description: 'AeroX is our flagship hackathon product developed for Smart India Hackathon (SIH) 2026. Built under high-pressure competitive conditions, AeroX focuses on airfare prediction pipelines, dynamic flight data processing, and scalable backend services. Engineered to deliver reliable real-time performance and responsive user interaction.',
+      techStack: ['Java', 'Spring Boot', 'REST APIs', 'React', 'AI/ML'],
+      github: '',
+      live: '',
+    },
+    {
+      title: 'SENTI',
+      category: 'Multimodal AI Desktop Assistant',
+      year: '2026',
+      featured: true,
+      description: 'SENTI is an advanced multimodal AI desktop assistant designed to unify system control and intelligent task execution. Features OS control, voice automation, WhatsApp messaging automation, web automation, multi-agent architecture, persistent memory system, and research automation for streamlined desktop productivity.',
+      techStack: ['Python', 'AI Agents', 'Multi-Agent', 'Voice AI', 'Automation'],
+      github: 'https://github.com/Unmesh-12634',
+      live: '',
     },
     {
       title: 'HACKMATE',
-      category: 'Community Hub',
+      category: 'Collaborative Platform',
       year: '2026',
-      description: 'HackMate is a platform designed to help students, developers, and innovators discover hackathons, connect with like-minded teammates, and collaborate on impactful ideas. The goal is to simplify the journey from finding opportunities to building strong teams and successful projects. Built as an independent initiative, HackMate focuses on community-driven collaboration, meaningful networking, and empowering aspiring builders to participate confidently in hackathons and innovation challenges.',
-      techStack: ['React', 'Node.js', 'MongoDB', 'Tailwind'],
+      description: 'HackMate is a real-time collaborative platform designed for hackathons and team productivity. It empowers students, developers, and innovators to discover hackathons, match with like-minded teammates, and collaborate on project boards seamlessly.',
+      techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'Tailwind'],
       github: 'https://github.com/Unmesh-12634/HackMate',
       live: 'https://hack-mate-ecru.vercel.app/',
+    },
+    {
+      title: 'MEDUCATE',
+      category: 'Healthcare AI',
+      year: '2026',
+      description: 'Meducate is an AI-powered medical learning platform designed to make healthcare education interactive, accessible, and personalized. The platform combines intelligent RAG retrieval, immersive 3D anatomy visualization, and contextual AI assistance. Collaboratively developed with Tanmay Jain, winning 1st Place at Google Lakecity Hackathon 2026.',
+      techStack: ['React', 'Three.js', 'RAG', 'Vertex AI', 'Tailwind'],
+      github: '', 
+      live: 'https://meducate.vercel.app/',
     },
     {
       title: 'RAG CREATOR STUDIO',
       category: 'AI Intelligence',
       year: '2026',
-      description: 'RAG Creator Studio is an AI-powered intelligence platform designed to help creators analyze, compare, and understand content performance across videos and short-form media. By combining retrieval-augmented generation with contextual analysis, the platform transforms raw content into actionable insights. The system enables users to explore trends, extract meaningful information from transcripts, and interact with content through natural conversations, making research, content strategy, and decision-making significantly more efficient.',
-      techStack: ['React', 'Node.js', 'Vertex AI', 'Python'],
+      description: 'An AI-powered intelligence platform combining LangChain, ChromaDB, and Pinecone vector search with contextual analysis to transform content into actionable insights. Supports natural conversations, transcript search, and trend extraction.',
+      techStack: ['Python', 'LangChain', 'ChromaDB', 'Pinecone', 'React'],
       github: 'https://github.com/Unmesh-12634/RAG-Chatbot',
       live: 'https://rag-chatbot-xi-steel.vercel.app/',
     },
     {
-      title: 'MINE VISION (SIH PROJECT)',
-      category: 'Computer Vision',
+      title: 'MINE VISION (ROCKFALL DETECTION & PREDICTION)',
+      category: 'Computer Vision & AI',
       year: '2025',
-      description: 'A Smart India Hackathon project leveraging computer vision and AI to process and analyze visual data. Built with backend logic, ML integration, and database connectivity.',
-      techStack: ['AI/ML', 'Backend', 'Python', 'OpenCV'],
+      description: 'A Smart India Hackathon project leveraging computer vision and AI to process and analyze opencast mining visual data. Engineered with YOLOv8 object detection, OpenCV, and telemetry models for automated rockfall hazard prediction and worker safety.',
+      techStack: ['Python', 'OpenCV', 'YOLOv8', 'FastAPI', 'TensorFlow'],
       github: 'https://github.com/Unmesh-12634/minevision/tree/main',
       live: '#',
     },
@@ -155,12 +185,30 @@ export function Projects() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.05 }}
                   whileHover={{ y: -4, scale: 1.01 }}
-                  className="bg-sohub-dark-grey border border-sohub-dark-grey/60 p-8 flex flex-col justify-between h-[360px] group transition-colors duration-300 hover:border-sohub-white/20"
+                  className={`p-8 flex flex-col justify-between h-[370px] group transition-all duration-300 relative overflow-hidden ${
+                    project.title === 'AEROX'
+                      ? 'border border-amber-500/40 bg-gradient-to-br from-amber-500/[0.08] via-sohub-dark-grey to-sohub-dark-grey hover:border-amber-400 shadow-[0_0_35px_rgba(245,158,11,0.08)]'
+                      : (project as any).featured
+                      ? 'border border-slate-300/30 bg-gradient-to-br from-slate-400/[0.06] via-sohub-dark-grey to-sohub-dark-grey hover:border-slate-200'
+                      : 'bg-sohub-dark-grey border border-sohub-dark-grey/60 hover:border-sohub-white/20'
+                  }`}
                 >
                   <div className="space-y-4">
                     <div className="flex justify-between items-start">
                       <div>
-                        <span className="text-[10px] uppercase font-bold tracking-widest text-sohub-grey">{project.category}</span>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] uppercase font-bold tracking-widest text-sohub-grey">{project.category}</span>
+                          {project.title === 'AEROX' && (
+                            <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                              ★ SIH 2026
+                            </span>
+                          )}
+                          {project.title === 'SENTI' && (
+                            <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-white/10 text-sohub-white border border-white/20">
+                              AI AGENT
+                            </span>
+                          )}
+                        </div>
                         <h3 className="text-xl font-bold text-sohub-white group-hover:translate-x-1.5 transition-transform duration-300 flex items-center gap-1">
                           {project.title}
                         </h3>
@@ -168,7 +216,7 @@ export function Projects() {
                       <ArrowUpRight className="w-5 h-5 text-sohub-grey opacity-0 group-hover:opacity-100 group-hover:text-sohub-white transition-all duration-300" />
                     </div>
 
-                    <p className="text-xs md:text-sm text-sohub-grey leading-relaxed line-clamp-4">
+                    <p className="text-xs md:text-sm text-sohub-grey leading-relaxed line-clamp-4 font-medium">
                       {project.description}
                     </p>
                   </div>

@@ -165,29 +165,29 @@ function ExpertiseSection() {
 
   const expertises = [
     {
-      icon: <Cpu className="w-5 h-5" />,
-      title: 'AI & Machine Learning',
-      details: 'Building computer vision pipelines (OpenCV), model integration, data cleaning workflows, and deploying smart model inferences.',
+      icon: <Code className="w-5 h-5" />,
+      title: 'Full Stack Java Development',
+      details: 'Building robust backend architectures with Java 17, Spring Boot, Maven, Hibernate, JPA, and RESTful APIs integrated with responsive React frontends.',
     },
     {
-      icon: <Code className="w-5 h-5" />,
-      title: 'Full Stack Development',
-      details: 'Structuring responsive client layers with React/Next.js and solid server APIs utilizing Node.js, Express, and SQL databases.',
+      icon: <Cpu className="w-5 h-5" />,
+      title: 'AI, ML & Generative AI',
+      details: 'Engineering RAG pipelines, autonomous AI agents, LLM integrations (Gemini, Groq, OpenAI), and computer vision workflows with Python.',
     },
     {
       icon: <Layers className="w-5 h-5" />,
-      title: 'System Design',
-      details: 'Designing scalable architectures, structured database schemas, and writing performant web integration loops.',
+      title: 'System Design & Databases',
+      details: 'Designing scalable architectures, schema models with MySQL, PostgreSQL, and ChromaDB vector stores for high-throughput applications.',
     },
     {
       icon: <Users className="w-5 h-5" />,
       title: 'Hackathon Leadership',
-      details: 'Leading multi-disciplinary teams under high-pressure timelines to conceptualize, design, and pitch functional prototypes.',
+      details: 'Leading squads in 15+ national hackathons under compressed 24-48h deadlines, translating conceptual ideas into podium-finishing products.',
     },
     {
       icon: <Lightbulb className="w-5 h-5" />,
-      title: 'Product Thinking',
-      details: 'Analyzing user needs, wireframing workflows, and prioritizing features to build products that solve actual user problems.',
+      title: 'Product Engineering',
+      details: 'Bridging engineering rigor with intuitive user experience, building end-to-end solutions that solve real-world problems.',
     },
   ];
 
@@ -673,13 +673,26 @@ export function Home() {
       category: 'AI / Medical Education',
       problem: 'Medical students struggle with dry, static content that fails to make complex anatomy and concepts truly intuitive.',
       solution: 'Built an AI-powered learning platform combining RAG-based knowledge retrieval, immersive 3D anatomy models, and a contextual AI assistant — collaboratively developed with Tanmay Jain.',
-      impact: 'Bridges technology and healthcare education, making complex medical concepts interactive, accessible, and personalised for every learner.',
-      tech: ['React', 'Three.js', 'RAG', 'AI', 'Node.js'],
+      impact: 'Secured 1st Place at Google Lakecity Hackathon 2026 out of 3,000+ national teams, bridging software engineering and medical education.',
+      tech: ['React', 'Three.js', 'RAG', 'Vertex AI', 'Node.js'],
       github: '',
       live: 'https://meducate.vercel.app/',
       image: '/project_meducate.png',
-      meta: ['MODULE // RAG_PIPELINE', 'MODALITY // 3D_ANATOMY'],
+      meta: ['MODULE // RAG_PIPELINE', 'AWARD // WINNER_1ST_PLACE'],
       status: 'STATUS // LIVE',
+    },
+    {
+      title: 'MINE VISION',
+      category: 'AI / Computer Vision & Rockfall Prediction',
+      problem: 'Rockfall hazards and visual risks in open-cast mines require real-time automated detection, classification, and alert systems to protect personnel and machinery.',
+      solution: 'Created an end-to-end computer vision and rockfall prediction pipeline using YOLO-based object detection with a real-time Python backend dashboard for mine safety monitoring.',
+      impact: 'Achieved 94.2% defect detection accuracy at 60 FPS, drastically reducing false-negative inspection rates.',
+      tech: ['Python', 'OpenCV', 'YOLOv8', 'FastAPI', 'TensorFlow'],
+      github: 'https://github.com/Unmesh-12634/minevision/tree/main',
+      live: '',
+      image: '/project_mine_vision.png',
+      meta: ['MODEL // YOLOV8_TINY', 'TASK // ROCKFALL_PREDICTION'],
+      status: 'CONF // 0.942',
     },
     {
       title: 'HACKMATE',
@@ -694,32 +707,6 @@ export function Home() {
       meta: ['NODES // TEAMS + EVENTS', 'STACK // REACT · NODE'],
       status: 'STATUS // LIVE',
     },
-    {
-      title: 'MINE VISION',
-      category: 'AI / Computer Vision',
-      problem: 'Manual visual inspection in industrial automation is slow, error-prone, and scales poorly under high throughput.',
-      solution: 'Created an end-to-end computer vision pipeline using YOLO-based object detection with a real-time Python backend dashboard.',
-      impact: 'Achieved 94.2% defect detection accuracy at 60 FPS, drastically reducing false-negative inspection rates.',
-      tech: ['Python', 'OpenCV', 'YOLOv8', 'FastAPI', 'TensorFlow'],
-      github: 'https://github.com/Unmesh-12634/minevision/tree/main',
-      live: '',
-      image: '/project_mine_vision.png',
-      meta: ['MODEL // YOLOV8_TINY', 'LATENCY // 12.4ms'],
-      status: 'CONF // 0.942',
-    },
-    {
-      title: 'RAG MODEL',
-      category: 'AI / NLP',
-      problem: 'General LLMs hallucinate and lack access to custom, up-to-date knowledge bases critical for domain-specific use cases.',
-      solution: 'Engineered a production-ready Retrieval-Augmented Generation pipeline using FAISS vector search, Gemini Pro, and a custom document ingestion layer.',
-      impact: 'Delivers grounded, context-aware AI responses over private documents with a live, shareable web interface.',
-      tech: ['Python', 'FAISS', 'Gemini Pro', 'LangChain', 'Streamlit'],
-      github: 'https://github.com/Unmesh-12634/RAG-Chatbot',
-      live: 'https://rag-chatbot-xi-steel.vercel.app/',
-      image: '/project_rag_model.png',
-      meta: ['EMBED // FAISS', 'LLM // GEMINI_PRO'],
-      status: 'CONTEXT // 128K_TOKENS',
-    },
   ];
 
   const hackathons = [
@@ -728,7 +715,7 @@ export function Home() {
       role: 'Team Lead & Developer',
       team: '3 Members',
       outcome: 'Winner - 1st Place',
-      learning: 'Secured 1st Place out of 3,000+ national-level teams for Meducators AI Platform.',
+      learning: 'Secured 1st Place out of 3,000+ national-level teams on 29 March 2026 for Meducators AI Platform.',
       theme: 'gold'
     },
     {
@@ -736,32 +723,40 @@ export function Home() {
       role: 'Team Lead & Developer',
       team: '5 Members',
       outcome: '1st Runner Up (2nd Position)',
-      learning: 'Secured 2nd Position at Sir Padampat Singhania University (SPSU Udaipur).',
+      learning: 'Secured 2nd Position at Sir Padampat Singhania University (SPSU Udaipur) during Panache 2026.',
       theme: 'silver'
     },
     {
       event: 'Hack with UttarPradesh',
-      role: 'Team Lead & Developer',
+      role: 'Participant / AI Developer',
       team: '5 Members',
-      outcome: 'CU Lucknow Campus Participant',
-      learning: 'Represented team at Chandigarh University & connected with co-founders of Blackbox AI.',
+      outcome: 'Top 300 / 15,000+ Participants',
+      learning: 'Ranked in Top 300 among ~15,000 participants at CU Lucknow; connected with co-founders of Blackbox AI.',
       theme: 'neutral'
+    },
+    {
+      event: 'HackWithIndia @ Microsoft Gurgaon',
+      role: 'Full Stack Team Lead',
+      team: '4 Members',
+      outcome: 'Top 40 Finalist',
+      learning: 'Selected in the Top 40 finalists out of 1000+ teams; built real-time collaborative platform at Microsoft Gurugram.',
+      theme: 'silver'
     },
   ];
 
   const timeline = [
-    { year: '2024', description: 'Started B.Tech, Learning Basic Programming, Core Languages & Web Dev' },
-    { year: '2025', description: 'Appointed HackerRank Ambassador, Learning AI/ML & Participating in Hackathons' },
-    { year: '2026', description: 'Continuing AI/ML & Building AI-Powered Tools & RAG Systems (Ongoing)' },
+    { year: '2024', description: 'Started B.Tech CSE at Techno NJR, mastering programming foundations (C, C++, Python, Web Dev, DSA).' },
+    { year: '2025', description: 'Appointed HackerRank Ambassador, hackathon leadership, Top 40 at Microsoft Gurgaon, advancing into AI/ML.' },
+    { year: '2026', description: 'Cranes Varsity Full Stack Java Advanced Diploma & Internship (Project Lead); Winner Google Lakecity (3000+ teams); SIH 2026 AeroX.' },
   ];
 
   const certificates = [
-    { title: 'Mobile Device & Application Security Workshop', authority: 'CUSAT & IIT Jammu' },
-    { title: 'AI-Machine Learning Engineer', authority: 'Reliance Foundation & Skill India' },
-    { title: 'Oracle Generative AI Professional', authority: 'Oracle' },
-    { title: 'IBM SkillBuild Frontend Web Development', authority: 'IBM / CSRBOX' },
-    { title: 'Google Cloud Gen AI Academy', authority: 'Google Cloud' },
-    { title: 'CyberSecurity Fundamentals', authority: 'IBM' },
+    { title: 'Advanced Diploma in Full Stack Java Development', authority: 'Cranes Varsity' },
+    { title: 'Agentic AI Certified Foundations Associate (2026)', authority: 'Oracle' },
+    { title: 'Oracle Cloud Infrastructure 2025 Generative AI Professional', authority: 'Oracle' },
+    { title: 'Google Cloud Gen AI Academy 2.0 (AI/ML Track)', authority: 'Google Cloud' },
+    { title: 'AWS Cloud Practitioner Essentials', authority: 'AWS' },
+    { title: 'Full Stack Developer Bootcamp', authority: 'GeeksforGeeks' },
   ];
 
   const events = [
@@ -830,9 +825,9 @@ export function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.25 }}
-                  className="text-lg md:text-2xl font-bold uppercase tracking-widest text-sohub-grey font-display"
+                  className="text-sm sm:text-base md:text-xl font-bold uppercase tracking-wider text-sohub-grey font-display"
                 >
-                  Engineer. Builder. AI Explorer.
+                  Computer Science Engineer | Full Stack Java Developer | AI/ML Developer
                 </motion.h2>
               </div>
 
@@ -842,20 +837,23 @@ export function Home() {
                 transition={{ duration: 0.8, delay: 0.35 }}
                 className="max-w-xl text-sm md:text-base text-sohub-grey font-medium leading-relaxed"
               >
-                Create digital experiences, intelligent systems, and impactful products. Bridging deep learning analytics with bespoke web design.
+                Building full-stack applications, AI-powered products, RAG systems, and intelligent solutions through code, experimentation, and hackathons.
               </motion.p>
 
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.45 }}
-                className="flex items-center gap-4 pt-4"
+                className="flex flex-wrap items-center gap-4 pt-4"
               >
-                <a href="#work" className="px-8 py-4 bg-sohub-white text-sohub-black font-bold text-xxs uppercase tracking-widest hover:bg-sohub-soft-grey transition-colors">
+                <a href="#work" className="px-7 py-3.5 bg-sohub-white text-sohub-black font-bold text-xxs uppercase tracking-widest hover:bg-sohub-soft-grey transition-colors">
                   Selected Work
                 </a>
-                <Link to="/contact" className="px-8 py-4 border border-sohub-white text-sohub-white font-bold text-xxs uppercase tracking-widest hover:bg-sohub-white hover:text-sohub-black transition-all">
-                  Let's Connect
+                <Link to="/projects" className="px-7 py-3.5 border border-sohub-dark-grey text-sohub-white font-bold text-xxs uppercase tracking-widest hover:border-sohub-white transition-all">
+                  View Projects
+                </Link>
+                <Link to="/contact" className="px-7 py-3.5 border border-sohub-white text-sohub-white font-bold text-xxs uppercase tracking-widest hover:bg-sohub-white hover:text-sohub-black transition-all">
+                  Contact Me
                 </Link>
               </motion.div>
             </div>
@@ -1022,11 +1020,10 @@ export function Home() {
               transition={{ duration: 0.8, delay: 0.15 }}
               className="text-sm md:text-base text-sohub-grey font-medium leading-relaxed max-w-2xl"
             >
-              B.Tech CSE student at Techno India NJR, Udaipur — building at the intersection of{' '}
-              <span className="text-sohub-white font-semibold">AI/ML</span>,{' '}
+              Computer Science Engineering student at Techno NJR and Full Stack Java Developer with hands-on experience building{' '}
+              <span className="text-sohub-white font-semibold">AI-powered applications</span>,{' '}
               <span className="text-sohub-white font-semibold">RAG systems</span>, and{' '}
-              <span className="text-sohub-white font-semibold">Full-Stack Engineering</span>.
-              20+ national hackathons. 1st Place — Google Lakecity 2026.
+              <span className="text-sohub-white font-semibold">production-grade web solutions</span>. Completed Advanced Diploma &amp; Project Lead Internship at Cranes Varsity. 1st Place — Google Lakecity 2026 (3,000+ teams).
             </motion.p>
 
             <div className="pt-2 flex items-center gap-2">
@@ -1052,15 +1049,11 @@ export function Home() {
 
           {/* Individual scroll-animated project cards */}
           <div className="flex flex-col gap-8">
-            <ProjectCardReveal idx={0}>
-              <ProjectCard proj={projects[0]} idx={0} />
-            </ProjectCardReveal>
-            <ProjectCardReveal idx={1}>
-              <ProjectCard proj={projects[1]} idx={1} />
-            </ProjectCardReveal>
-            <ProjectCardReveal idx={2}>
-              <ProjectCard proj={projects[2]} idx={2} />
-            </ProjectCardReveal>
+            {projects.map((proj, idx) => (
+              <ProjectCardReveal key={proj.title} idx={idx}>
+                <ProjectCard proj={proj} idx={idx} />
+              </ProjectCardReveal>
+            ))}
           </div>
         </section>
 

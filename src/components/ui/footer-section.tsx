@@ -63,7 +63,7 @@ const NAV_SECTIONS = [
     accent: ACCENT.emerald,
     links: [
       { label: 'Contact Me', to: '/contact' },
-      { label: 'Email', to: 'mailto:contact@unmeshjoshi.com', external: true },
+      { label: 'Email', to: 'mailto:unmeshjoshi083@gmail.com', external: true },
     ],
   },
 ];
@@ -533,7 +533,7 @@ export function FooterSection() {
                     className="text-xxs mt-1.5 font-bold tracking-wider uppercase opacity-85"
                     style={{ color: textMuted }}
                   >
-                    Engineer • Builder • AI Explorer
+                    Computer Science Engineer • Full Stack Java Developer • AI/ML Developer
                   </div>
                 </div>
               </div>
@@ -541,8 +541,8 @@ export function FooterSection() {
 
             {/* Tagline */}
             <Reveal delay={0.12}>
-              <p className="text-sm leading-relaxed max-w-[26ch]" style={{ color: textMuted }}>
-                Crafting premium digital experiences with code, design, and obsessive attention to detail.
+              <p className="text-sm leading-relaxed max-w-[30ch]" style={{ color: textMuted }}>
+                Building full-stack applications, AI-powered products, RAG systems, and intelligent solutions.
               </p>
             </Reveal>
 
